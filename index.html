@@ -179,6 +179,54 @@
                     <option value="5">Extremely reliable</option>
                 </select>
             </div>
+            <!-- Programming Language and Framework Selection -->
+            <h3>Programming Language and Framework</h3>
+            <div class="form-group">
+                <label for="language">Programming Language:</label>
+                <select id="language" name="language" class="form-control" onchange="updateComponents()">
+                    <option value="0">Select</option>
+                    <option value="Python">Python</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Java">Java</option>
+                    <option value="TypeScript">TypeScript</option>
+                    <option value=".Net">.Net</option>
+                    <option value="PHP">PHP</option>
+                    <option value="Ruby">Ruby</option>
+                    <option value="Perl">Perl</option>
+                    <option value="Golang">Golang</option>
+                    <option value="Swift">Swift</option>
+                    <option value="Kotlin">Kotlin</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="component">Component:</label>
+                <select id="component" name="component" class="form-control" onchange="updateFrameworks()">
+                    <option value="0">Select</option>
+                    <option value="frontend">Frontend</option>
+                    <option value="backend">Backend</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="framework">Framework:</label>
+                <select id="framework" name="framework" class="form-control" onchange="updateVersions()">
+                    <option value="0">Select</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="version">Version:</label>
+                <select id="version" name="version" class="form-control" onchange="showScores()">
+                    <option value="0">Select</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="popularity">Popularity:</label>
+                <input type="text" id="popularity" name="popularity" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label for="communitySupport">Community Support:</label>
+                <input type="text" id="communitySupport" name="communitySupport" class="form-control" readonly>
+            </div>
+            <!-- Grand total-->
             <div class="text-center">
                 <h3>Total Score: <span id="totalScore">0.00</span></h3>
             </div>
