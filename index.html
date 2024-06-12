@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoring Application</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Web Application Scoring</h1>
+        <form id="scoringForm" class="mt-4">
+
+        <h3>Code base evaluation (20%):</h3>
+            <!-- Code Readability and Maintainability -->
+            <div class="form-group">
+                <label for="techDoc">Code Readability and Maintainability (Code Smells)</label>
+                <select id="codeSmells" name="techDoc" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">&gt; 200 code smells</option>
+                    <option value="2">100-200 code smells</option>
+                    <option value="3">50-100 code smells</option>
+                    <option value="4">20-50 code smells</option>
+                    <option value="5">&lt; 20 code smells</option>
+                </select>
+            </div>
+            <!-- Test Coverage (Unit tests)-->
+            <div class="form-group">
+                <label for="testCoverage">Test Coverage (Unit tests)</label>
+                <select id="testCoverage" name="testCoverage" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">&lt; 20% coverage</option>
+                    <option value="2">20-40% coverage</option>
+                    <option value="3">40-60% coverage</option>
+                    <option value="4">60-80% coverage</option>
+                    <option value="5">&gt; 80% coverage</option>
+                </select>
+            </div>
+            <!-- Adherence to Best Practices -->
+            <div class="form-group">
+                <label for="bestPractices">Adherence to Best Practices</label>
+                <select id="bestPractices" name="bestPractices" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">&gt; 100 violations</option>
+                    <option value="2">50-100 violations</option>
+                    <option value="3">20-50 violations</option>
+                    <option value="4">10-20 violations</option>
+                    <option value="5">&lt; 10 violations</option>
+                </select>
+            </div>
+            <!-- Documentation Completeness: -->
+            <div class="form-group">
+                <label for="techDoc">Documentation Completeness:</label>
+                <select id="techDoc" name="techDoc" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">&lt; 10% comments density</option>
+                    <option value="2">10-20% comments density</option>
+                    <option value="3">20-30% comments density</option>
+                    <option value="4">30-40% comments density</option>
+                    <option value="5">&gt; 40% comments density</option>
+                </select>
+            </div>
+            <!-- Version Control and CI/CD Practices -->
+            <div class="form-group">
+                <label for="versionControl">Version Control and CI/CD Practices</label>
+                <select id="versionControl" name="versionControl" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">No version control</option>
+                    <option value="2">Basic version control</option>
+                    <option value="3">Limited CI/CD</option>
+                    <option value="4">Good CI/CD practices</option>
+                    <option value="5">Excellent CI/CD practices</option>
+                </select>
+            </div>
+
+ 
+            <!-- System Architecture -->
+            <h3>System Architecture (20%):</h3>
+            <div class="form-group">
+                <label for="scalability">Scalability:</label>
+                <select id="scalability" name="scalability" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">Not scalable</option>
+                    <option value="2">Limited scalability</option>
+                    <option value="3">Moderate scalability</option>
+                    <option value="4">Highly scalable</option>
+                    <option value="5">Extremely scalable</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modularity">Modularity:</label>
+                <select id="modularity" name="modularity" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">Monolithic design</option>
+                    <option value="2">Limited modularity</option>
+                    <option value="3">Some modular components</option>
+                    <option value="4">Well-modularized</option>
+                    <option value="5">Highly modularized</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="security">Security:</label>
+                <select id="security" name="security" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">No security measures</option>
+                    <option value="2">Minimal security measures</option>
+                    <option value="3">Basic security measures</option>
+                    <option value="4">Good security measures</option>
+                    <option value="5">Excellent security measures</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="performance">Performance:</label>
+                <select id="performance" name="performance" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">Poor performance</option>
+                    <option value="2">Limited performance</option>
+                    <option value="3">Moderate performance</option>
+                    <option value="4">Good performance</option>
+                    <option value="5">Excellent performance</option>
+                </select>
+            </div>
+            <!-- Technology Stack -->
+            <h3>Technology Stack (20%):</h3>
+            <div class="form-group">
+                <label for="compatibility">Compatibility:</label>
+                <select id="compatibility" name="compatibility" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">Incompatible</option>
+                    <option value="2">Limited compatibility</option>
+                    <option value="3">Some compatibility</option>
+                    <option value="4">Good compatibility</option>
+                    <option value="5">Excellent compatibility</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="maintenance">Maintenance and Updates:</label>
+                <select id="maintenance" name="maintenance" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">No maintenance</option>
+                    <option value="2">Minimal maintenance</option>
+                    <option value="3">Some maintenance</option>
+                    <option value="4">Good maintenance</option>
+                    <option value="5">Excellent maintenance</option>
+                </select>
+            </div>
+            <!-- Infrastructure Requirements -->
+            <h3>Infrastructure Requirements (20%):</h3>
+            <div class="form-group">
+                <label for="infraScalability">Scalability:</label>
+                <select id="infraScalability" name="infraScalability" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">Not scalable</option>
+                    <option value="2">Limited scalability</option>
+                    <option value="3">Moderate scalability</option>
+                    <option value="4">Highly scalable</option>
+                    <option value="5">Extremely scalable</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="costEfficiency">Cost Efficiency:</label>
+                <select id="costEfficiency" name="costEfficiency" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">Very costly</option>
+                    <option value="2">Costly</option>
+                    <option value="3">Moderate cost efficiency</option>
+                    <option value="4">Cost-efficient</option>
+                    <option value="5">Very cost-efficient</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="reliability">Reliability:</label>
+                <select id="reliability" name="reliability" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">Not reliable</option>
+                    <option value="2">Limited reliability</option>
+                    <option value="3">Moderate reliability</option>
+                    <option value="4">Highly reliable</option>
+                    <option value="5">Extremely reliable</option>
+                </select>
+            </div>
+            <div class="text-center">
+                <h3>Total Score: <span id="totalScore">0.00</span></h3>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
