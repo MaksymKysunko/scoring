@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scoring Application</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scoring Application</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            .fixed-score {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1000;
+                background-color: #f8f9fa;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+        </style>
+    </head>
 <body>
+    <div class="fixed-score">
+        <h3>Total Score: <span id="totalScore">0.00</span></h3>
+    </div>
     <div class="container mt-5">
         <h1 class="text-center">Web Application Scoring</h1>
         <form id="scoringForm" class="mt-4">
@@ -225,10 +241,6 @@
             <div class="form-group">
                 <label for="communitySupport">Community Support:</label>
                 <input type="text" id="communitySupport" name="communitySupport" class="form-control" readonly>
-            </div>
-            <!-- Grand total-->
-            <div class="text-center">
-                <h3>Total Score: <span id="totalScore">0.00</span></h3>
             </div>
         </form>
     </div>
