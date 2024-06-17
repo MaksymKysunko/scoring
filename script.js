@@ -265,6 +265,7 @@ function showScores() {
         document.getElementById('popularity').value = popularity;
         document.getElementById('communitySupport').value = support;
     }
+    calculateTotalScore()
 }
 
 
@@ -272,17 +273,15 @@ function calculateTotalScore() {
     const sections = {
         techDoc: ["techDoc","codeSmells","testCoverage","bestPractices","versionControl"],
         systemArchitecture: ["scalability", "modularity", "security", "performance"],
-        technologyStack: ["compatibility", "maintenance"],
         infrastructureRequirements: ["infraScalability", "costEfficiency", "reliability"],
         language: ["popularity","communitySupport"]
     };
 
     const weights = {
-        techDoc: 0.20,
-        systemArchitecture: 0.20,
-        technologyStack: 0.20,
-        infrastructureRequirements: 0.20,
-        language: 0.20
+        techDoc: 0.25,
+        systemArchitecture: 0.25,
+        infrastructureRequirements: 0.25,
+        language: 0.25
     };
 
     let totalScore = 0;
