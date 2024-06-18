@@ -26,12 +26,28 @@
     <div class="container mt-5">
         <h1 class="text-center">Web Application Scoring</h1>
         <form id="scoringForm" class="mt-4">
-
+                <div class="form-group">
+                    <label for="codeScore">Code Readability and Maintainability Score:</label>
+                    <input type="number" id="codeScore" name="codeScore" class="form-control" value="0.25" onchange="calculateTotalScore()">
+                </div>
+                <div class="form-group">
+                    <label for="systemArchitectureScore">System Architecture Score:</label>
+                    <input type="number" id="systemArchitectureScore" name="systemArchitectureScore" class="form-control" value="0.25" onchange="calculateTotalScore()">
+                </div>
+                <div class="form-group">
+                    <label for="technologyStackScore">Technology Stack Score:</label>
+                    <input type="number" id="technologyStackScore" name="technologyStackScore" class="form-control" value="0.25" onchange="calculateTotalScore()">
+                </div>
+                <div class="form-group">
+                    <label for="infrastructureRequirementsScore">Infrastructure Requirements Score:</label>
+                    <input type="number" id="infrastructureRequirementsScore" name="infrastructureRequirementsScore" class="form-control" value="0.25" onchange="calculateTotalScore()">
+                </div>
+            </div>
         <h3>Code base evaluation (20%):</h3>
             <!-- Code Readability and Maintainability -->
             <div class="form-group">
-                <label for="techDoc">Code Readability and Maintainability (Code Smells)</label>
-                <select id="codeSmells" name="techDoc" class="form-control" onchange="calculateTotalScore()">
+                <label for="codeSmells">Code Readability and Maintainability (Code Smells)</label>
+                <select id="codeSmells" name="codeSmells" class="form-control" onchange="calculateTotalScore()">
                     <option value="0">Select</option>
                     <option value="1">&gt; 200 code smells</option>
                     <option value="2">100-200 code smells</option>

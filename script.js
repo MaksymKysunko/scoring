@@ -271,17 +271,17 @@ function showScores() {
 
 function calculateTotalScore() {
     const sections = {
-        techDoc: ["techDoc","codeSmells","testCoverage","bestPractices","versionControl"],
+        codeScore: ["codeSmells","testCoverage","bestPractices","techDoc","versionControl"],
         systemArchitecture: ["scalability", "modularity", "security", "performance"],
         infrastructureRequirements: ["infraScalability", "costEfficiency", "reliability"],
         language: ["popularity","communitySupport"]
     };
 
     const weights = {
-        techDoc: 0.25,
-        systemArchitecture: 0.25,
-        infrastructureRequirements: 0.25,
-        language: 0.25
+        codeScore: parseFloat(document.getElementById('codeScore').value) || 0.25,
+        systemArchitecture: parseFloat(document.getElementById('systemArchitectureScore').value) || 0.25,
+        technologyStack: parseFloat(document.getElementById('technologyStackScore').value) || 0.25,
+        infrastructureRequirements: parseFloat(document.getElementById('infrastructureRequirementsScore').value) || 0.25
     };
 
     let totalScore = 0;
