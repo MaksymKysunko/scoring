@@ -31,16 +31,12 @@
                 <input type="number" id="codeScore" name="codeScore" class="form-control" value="0.25" onchange="calculateTotalScore()">
             </div>
             <div class="form-group">
-                <label for="systemArchitectureScore">System Architecture Score:</label>
-                <input type="number" id="systemArchitectureScore" name="systemArchitectureScore" class="form-control" value="0.25" onchange="calculateTotalScore()">
+                <label for="buildPipelineScore">CI/CD Pipeline Score:</label>
+                <input type="number" id="buildPipelineScore" name="buildPipelineScore" class="form-control" value="0.25" onchange="calculateTotalScore()">
             </div>
             <div class="form-group">
-                <label for="technologyStackScore">Technology Stack Score:</label>
-                <input type="number" id="technologyStackScore" name="technologyStackScore" class="form-control" value="0.25" onchange="calculateTotalScore()">
-            </div>
-            <div class="form-group">
-                <label for="infrastructureRequirementsScore">Infrastructure Requirements Score:</label>
-                <input type="number" id="infrastructureRequirementsScore" name="infrastructureRequirementsScore" class="form-control" value="0.25" onchange="calculateTotalScore()">
+                <label for="language">System Architecture Score:</label>
+                <input type="number" id="language" name="language" class="form-control" value="0.25" onchange="calculateTotalScore()">
             </div>
             <!-- Scoring form -->
             <form id="scoringForm" class="mt-4">
@@ -93,113 +89,49 @@
                     <option value="5">&gt; 40% comments density</option>
                 </select>
             </div>
-            <!-- Version Control and CI/CD Practices -->
+            <!-- Version Control Practices -->
             <div class="form-group">
-                <label for="versionControl">Version Control and CI/CD Practices</label>
+                <label for="versionControl">Version Control Practices</label>
                 <select id="versionControl" name="versionControl" class="form-control" onchange="calculateTotalScore()">
                     <option value="0">Select</option>
                     <option value="1">No version control</option>
                     <option value="2">Basic version control</option>
-                    <option value="3">Limited CI/CD</option>
-                    <option value="4">Good CI/CD practices</option>
-                    <option value="5">Excellent CI/CD practices</option>
-                </select>
-            </div>
-            <!-- CD presence -->
-            <div class="form-group">
-                <label for="cdPresence">CD Presence:</label>
-                <select id="cdPresence" name="cdPresence" class="form-control" onchange="calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">Only production environment, artifacts are deployed manually with full production stop</option>
-                    <option value="2">Presence of development/testing/staging environments, artifacts deployed manually with full production stop</option>
-                    <option value="3">Deployment pipeline implemented but executed manually</option>
-                    <option value="4">Deployment pipeline with basic health checks before closing maintenance window</option>
-                    <option value="5">Fully automated deployment pipeline with QA, canary deployments, and rollback capabilities</option>
+                    <option value="3">Good version control practices</option>
+                    <option value="4">Excellent version control practices</option>
                 </select>
             </div>
 
+            <!-- CI Pipeline and Quality Gates -->
+            <h3>CI Pipeline and Quality Gates (20%):</h3>
+            <div class="form-group">
+                <label for="ciPipeline">CI Pipeline and Quality Gates:</label>
+                <select id="ciPipeline" name="ciPipeline" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">No CI pipeline</option>
+                    <option value="2">CI pipeline configured but manual execution</option>
+                    <option value="3">CI pipeline with automatic builds</option>
+                    <option value="4">CI pipeline with automated tests</option>
+                    <option value="5">CI pipeline with quality gates</option>
+                    <option value="6">CI pipeline with advanced reporting and notifications</option>
+                    <option value="7">CI pipeline with continuous feedback and improvement</option>
+                </select>
+            </div>
+
+            <!-- Build State -->
+            <div class="form-group">
+                <label for="buildState">Build State:</label>
+                <select id="buildState" name="buildState" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">CI does not exist</option>
+                    <option value="2">CI configured but build fails because of errors</option>
+                    <option value="3">CI configured but build fails because of missing dependencies</option>
+                    <option value="4">CI exists but build fails because of incompatible dependencies</option>
+                    <option value="5">Build succeeds but with warnings or minor issues</option>
+                    <option value="6">Build succeeds without issues</option>
+                </select>
+            </div>
  
-            <!-- System Architecture -->
-            <h3>System Architecture (20%):</h3>
-            <div class="form-group">
-                <label for="scalability">Scalability:</label>
-                <select id="scalability" name="scalability" class="form-control" onchange="calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">Not scalable</option>
-                    <option value="2">Limited scalability</option>
-                    <option value="3">Moderate scalability</option>
-                    <option value="4">Highly scalable</option>
-                    <option value="5">Extremely scalable</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="modularity">Modularity:</label>
-                <select id="modularity" name="modularity" class="form-control" onchange="calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">Monolithic design</option>
-                    <option value="2">Limited modularity</option>
-                    <option value="3">Some modular components</option>
-                    <option value="4">Well-modularized</option>
-                    <option value="5">Highly modularized</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="security">Security:</label>
-                <select id="security" name="security" class="form-control" onchange="calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">No security measures</option>
-                    <option value="2">Minimal security measures</option>
-                    <option value="3">Basic security measures</option>
-                    <option value="4">Good security measures</option>
-                    <option value="5">Excellent security measures</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="performance">Performance:</label>
-                <select id="performance" name="performance" class="form-control" onchange="calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">Poor performance</option>
-                    <option value="2">Limited performance</option>
-                    <option value="3">Moderate performance</option>
-                    <option value="4">Good performance</option>
-                    <option value="5">Excellent performance</option>
-                </select>
-            </div>
-            <!-- Infrastructure Requirements -->
-            <h3>Infrastructure Requirements (20%):</h3>
-            <div class="form-group">
-                <label for="infraScalability">Scalability:</label>
-                <select id="infraScalability" name="infraScalability" class="form-control" onchange="calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">Not scalable</option>
-                    <option value="2">Limited scalability</option>
-                    <option value="3">Moderate scalability</option>
-                    <option value="4">Highly scalable</option>
-                    <option value="5">Extremely scalable</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="costEfficiency">Cost Efficiency:</label>
-                <select id="costEfficiency" name="costEfficiency" class="form-control" onchange="calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">Very costly</option>
-                    <option value="2">Costly</option>
-                    <option value="3">Moderate cost efficiency</option>
-                    <option value="4">Cost-efficient</option>
-                    <option value="5">Very cost-efficient</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="reliability">Reliability:</label>
-                <select id="reliability" name="reliability" class="form-control" onchange="calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">Not reliable</option>
-                    <option value="2">Limited reliability</option>
-                    <option value="3">Moderate reliability</option>
-                    <option value="4">Highly reliable</option>
-                    <option value="5">Extremely reliable</option>
-                </select>
-            </div>
+
             <!-- Programming Language and Framework Selection -->
             <h3>Programming Language and Framework</h3>
             <div class="form-group">

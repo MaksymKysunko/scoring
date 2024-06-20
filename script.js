@@ -271,18 +271,16 @@ function showScores() {
 
 function calculateTotalScore() {
     const sections = {
-        codeScore: ["codeSmells", "testCoverage", "bestPractices", "techDoc", "versionControl","cdPresence"],
-        systemArchitecture: ["scalability", "modularity", "security", "performance"],
-        technologyStack: [],  // Add parameters if any
-        infrastructureRequirements: ["infraScalability", "costEfficiency", "reliability"],
-        language: ["popularity", "communitySupport"]
+        codeScore: ["codeSmells", "testCoverage", "bestPractices", "techDoc", "versionControl"],
+        buildState: ["ciPipeline", 'buildState'],
+        languageScore: ["popularity", "communitySupport"]
     };
 
     const weights = {
-        codeScore: parseFloat(document.getElementById('codeScore').value) || 0.25,
-        systemArchitecture: parseFloat(document.getElementById('systemArchitectureScore').value) || 0.25,
-        technologyStack: parseFloat(document.getElementById('technologyStackScore').value) || 0.25,
-        infrastructureRequirements: parseFloat(document.getElementById('infrastructureRequirementsScore').value) || 0.25
+        codeScore: parseFloat(document.getElementById('codeScore').value) || 0.20,
+        buildState: parseFloat(document.getElementById('buildPipelineScore').value) || 0.20,
+        languageScore: parseFloat(document.getElementById('languageScore').value) || 0.20
+
     };
 
     let totalScore = 0;
