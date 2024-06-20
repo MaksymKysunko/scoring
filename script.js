@@ -271,10 +271,11 @@ function showScores() {
 
 function calculateTotalScore() {
     const sections = {
-        codeScore: ["codeSmells","testCoverage","bestPractices","techDoc","versionControl"],
+        codeScore: ["codeSmells", "testCoverage", "bestPractices", "techDoc", "versionControl","cdPresence"],
         systemArchitecture: ["scalability", "modularity", "security", "performance"],
+        technologyStack: [],  // Add parameters if any
         infrastructureRequirements: ["infraScalability", "costEfficiency", "reliability"],
-        language: ["popularity","communitySupport"]
+        language: ["popularity", "communitySupport"]
     };
 
     const weights = {
