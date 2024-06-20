@@ -25,22 +25,15 @@
     </div>
     <div class="container mt-5">
         <h1 class="text-center">Web Application Scoring</h1>
-            <!-- Scoring settings -->
-            <div class="form-group">
-                <label for="codeScore">Code Readability and Maintainability Score:</label>
-                <input type="number" id="codeScore" name="codeScore" class="form-control" value="0.25" onchange="calculateTotalScore()">
-            </div>
-            <div class="form-group">
-                <label for="buildPipelineScore">CI/CD Pipeline Score:</label>
-                <input type="number" id="buildPipelineScore" name="buildPipelineScore" class="form-control" value="0.25" onchange="calculateTotalScore()">
-            </div>
-            <div class="form-group">
-                <label for="language">System Architecture Score:</label>
-                <input type="number" id="language" name="language" class="form-control" value="0.25" onchange="calculateTotalScore()">
-            </div>
             <!-- Scoring form -->
             <form id="scoringForm" class="mt-4">
-            <h3>Code base evaluation (20%):</h3>
+            <h3>Code base evaluation:</h3>
+            <div class="form-group row">
+                <label for="codeScoreWeight" class="col-sm-4 col-form-label">Weight:</label>
+                <div class="col-sm-8">
+                    <input type="number" id="codeScoreWeight" name="codeScoreWeight" class="form-control" value="0.30" onchange="calculateTotalScore()">
+                </div>
+            </div>
             <!-- Code Readability and Maintainability -->
             <div class="form-group">
                 <label for="codeSmells">Code Readability and Maintainability (Code Smells)</label>
@@ -90,30 +83,24 @@
                 </select>
             </div>
             <!-- Version Control Practices -->
-            <div class="form-group">
-                <label for="versionControl">Version Control Practices</label>
-                <select id="versionControl" name="versionControl" class="form-control" onchange="calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">No version control</option>
-                    <option value="2">Basic version control</option>
-                    <option value="3">Good version control practices</option>
-                    <option value="4">Excellent version control practices</option>
-                </select>
-            </div>
 
             <!-- CI Pipeline and Quality Gates -->
-            <h3>CI Pipeline and Quality Gates (20%):</h3>
+            <h3>CI Pipeline and Quality Gates:</h3>
+            <div class="form-group row">
+                <label for="buildPipelineScoreWeight" class="col-sm-4 col-form-label">Weight:</label>
+                <div class="col-sm-8">
+                    <input type="number" id="buildPipelineScoreWeight" name="buildPipelineScoreWeight" class="form-control" value="0.25" onchange="calculateTotalScore()">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="ciPipeline">CI Pipeline and Quality Gates:</label>
                 <select id="ciPipeline" name="ciPipeline" class="form-control" onchange="calculateTotalScore()">
                     <option value="0">Select</option>
                     <option value="1">No CI pipeline</option>
                     <option value="2">CI pipeline configured but manual execution</option>
-                    <option value="3">CI pipeline with automatic builds</option>
-                    <option value="4">CI pipeline with automated tests</option>
-                    <option value="5">CI pipeline with quality gates</option>
-                    <option value="6">CI pipeline with advanced reporting and notifications</option>
-                    <option value="7">CI pipeline with continuous feedback and improvement</option>
+                    <option value="3">CI pipeline with automatic builds and automated tests</option>
+                    <option value="4">CI pipeline with quality gates</option>
+                    <option value="5">CI pipeline with advanced reporting and notifications</option>
                 </select>
             </div>
 
@@ -123,17 +110,22 @@
                 <select id="buildState" name="buildState" class="form-control" onchange="calculateTotalScore()">
                     <option value="0">Select</option>
                     <option value="1">CI does not exist</option>
-                    <option value="2">CI configured but build fails because of errors</option>
-                    <option value="3">CI configured but build fails because of missing dependencies</option>
-                    <option value="4">CI exists but build fails because of incompatible dependencies</option>
-                    <option value="5">Build succeeds but with warnings or minor issues</option>
-                    <option value="6">Build succeeds without issues</option>
+                    <option value="2">CI configured but build fails because of missing dependencies</option>
+                    <option value="3">CI exists but build fails because of incompatible dependencies</option>
+                    <option value="4">Build succeeds but with warnings or minor issues</option>
+                    <option value="5">Build succeeds without issues</option>
                 </select>
             </div>
  
 
             <!-- Programming Language and Framework Selection -->
             <h3>Programming Language and Framework</h3>
+            <div class="form-group row">
+                <label for="languageScoreWeight" class="col-sm-4 col-form-label">Language and Frameworks Score:</label>
+                <div class="col-sm-8">
+                    <input type="number" id="languageScoreWeight" name="languageScoreWeight" class="form-control" value="0.30" onchange="calculateTotalScore()">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="language">Programming Language:</label>
                 <select id="language" name="language" class="form-control" onchange="updateComponents()">

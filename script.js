@@ -271,15 +271,15 @@ function showScores() {
 
 function calculateTotalScore() {
     const sections = {
-        codeScore: ["codeSmells", "testCoverage", "bestPractices", "techDoc", "versionControl"],
+        codeScore: ["codeSmells", "testCoverage", "bestPractices", "techDoc"],
         buildState: ["ciPipeline", 'buildState'],
         languageScore: ["popularity", "communitySupport"]
     };
 
     const weights = {
-        codeScore: parseFloat(document.getElementById('codeScore').value) || 0.20,
-        buildState: parseFloat(document.getElementById('buildPipelineScore').value) || 0.20,
-        languageScore: parseFloat(document.getElementById('languageScore').value) || 0.20
+        codeScore: parseFloat(document.getElementById('codeScoreWeight').value) || 0.20,
+        buildState: parseFloat(document.getElementById('buildPipelineScoreWeight').value) || 0.20,
+        languageScore: parseFloat(document.getElementById('languageScoreWeight').value) || 0.20
 
     };
 
