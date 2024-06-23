@@ -1,40 +1,29 @@
 const frameworks = {
     Python: {
+        monolith: ["Django", "Flask", "Pyramid"],
         frontend: ["Django", "Flask", "Pyramid", "Tornado", "Web2py"],
         backend: ["Django", "Flask", "Pyramid", "Tornado", "Web2py"]
     },
     JavaScript: {
-        frontend: ["React", "Vue", "Angular"],
-        backend: ["Node.js", "Express"]
+        monolith: ["Express", "Meteor", "Sails.js"],
+        frontend: ["React", "Vue", "Angular", "Ext JS"],
+        backend: ["Node.js", "Express", "Nest"]
     },
     Java: {
+        monolith: ["Spring", "Struts", "JSF"],
         backend: ["Spring", "Struts", "Hibernate"]
     },
-    TypeScript: {
-        frontend: ["Angular", "React", "Vue"],
-        backend: ["NestJS", "Express"]
-    },
-    ".Net": {
-        backend: [".NET Core", "ASP.NET"]
-    },
     PHP: {
+        monolith: ["Laravel", "Symfony", "CodeIgniter"],
         backend: ["Laravel", "Symfony", "CodeIgniter", "Zend", "CakePHP"]
     },
     Ruby: {
+        monolith: ["Rails", "Sinatra", "Hanami"],
         backend: ["Rails", "Sinatra"]
     },
-    Perl: {
-        backend: ["Catalyst", "Mojolicious"]
-    },
-    Golang: {
-        backend: ["Gin", "Beego", "Echo"]
-    },
-    Swift: {
-        frontend: ["SwiftUI"],
-        backend: ["Vapor", "Kitura"]
-    },
-    Kotlin: {
-        backend: ["Ktor", "Spring"]
+    ".Net": {
+        monolith: [".NET Core", "ASP.NET", "Blazor"],
+        backend: [".NET Core", "ASP.NET"]
     }
 };
 
@@ -219,6 +208,33 @@ const versions = {
     Ktor: {
         "2.x": { popularity: 5, support: 5 },
         "1.x": { popularity: 4, support: 4 }
+    },
+    Meteor: {
+        "2.x": { popularity: 5, support: 5 },
+        "1.x": { popularity: 4, support: 4 }
+    },
+    "Sails.js": {
+        "1.x": { popularity: 5, support: 5 },
+        "0.x": { popularity: 4, support: 4 }
+    },
+    JSF: {
+        "2.x": { popularity: 4, support: 4 },
+        "1.x": { popularity: 3, support: 3 }
+    },
+    Hanami: {
+        "1.x": { popularity: 4, support: 4 }
+    },
+    "Ext JS": {
+        "7.x": { popularity: 5, support: 5 },
+        "6.x": { popularity: 5, support: 5 },
+        "5.x": { popularity: 4, support: 4 },
+        "4.x and below": { popularity: 3, support: 3 }
+    },
+    Nest: {
+        "7.x": { popularity: 5, support: 5 },
+        "6.x": { popularity: 5, support: 5 },
+        "5.x": { popularity: 4, support: 4 },
+        "4.x and below": { popularity: 3, support: 3 }
     }
 };
 
@@ -273,14 +289,15 @@ function calculateTotalScore() {
     const sections = {
         codeScore: ["codeSmells", "testCoverage", "bestPractices", "techDoc"],
         buildState: ["ciPipeline", 'buildState'],
-        languageScore: ["popularity", "communitySupport"]
+        languageScore: ["popularity", "communitySupport"],
+        versionControl: ["branchingStrategy", "commitMessages", "pullRequests"]
     };
 
     const weights = {
         codeScore: parseFloat(document.getElementById('codeScoreWeight').value) || 0.20,
         buildState: parseFloat(document.getElementById('buildPipelineScoreWeight').value) || 0.20,
-        languageScore: parseFloat(document.getElementById('languageScoreWeight').value) || 0.20
-
+        languageScore: parseFloat(document.getElementById('languageScoreWeight').value) || 0.20,
+        versionControl: parseFloat(document.getElementById('versionControlWeight').value) || 0.20
     };
 
     let totalScore = 0;
@@ -305,3 +322,4 @@ function calculateTotalScore() {
 
     document.getElementById('totalScore').textContent = totalScore.toFixed(2);
 }
+
