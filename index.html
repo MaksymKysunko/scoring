@@ -21,7 +21,7 @@
     </head>
 <body>
     <div class="fixed-score">
-        <h3>Total Score: <span id="totalScore">0.00</span></h3>
+        <h3>Total Score: <span id="totalScoreOnTop">0.00</span></h3>
     </div>
     <div class="container mt-5">
         <h1 class="text-center">Web Application Scoring</h1>
@@ -31,7 +31,7 @@
             <div class="form-group row">
                 <label for="codeScoreWeight" class="col-sm-4 col-form-label">Weight:</label>
                 <div class="col-sm-8">
-                    <input type="number" id="codeScoreWeight" name="codeScoreWeight" class="form-control" value="0.30" onchange="calculateTotalScore()">
+                    <input type="number" id="codeScoreWeight" name="codeScoreWeight" class="form-control" onchange="calculateTotalScore()">
                 </div>
             </div>
             <!-- Code Readability and Maintainability -->
@@ -46,7 +46,6 @@
                     <option value="5">&lt; 20 code smells</option>
                 </select>
             </div>
-            <!-- Test Coverage (Unit tests)-->
             <div class="form-group">
                 <label for="testCoverage">Test Coverage (Unit tests)</label>
                 <select id="testCoverage" name="testCoverage" class="form-control" onchange="calculateTotalScore()">
@@ -58,7 +57,6 @@
                     <option value="5">&gt; 80% coverage</option>
                 </select>
             </div>
-            <!-- Adherence to Best Practices -->
             <div class="form-group">
                 <label for="bestPractices">Adherence to Best Practices</label>
                 <select id="bestPractices" name="bestPractices" class="form-control" onchange="calculateTotalScore()">
@@ -70,7 +68,6 @@
                     <option value="5">&lt; 10 violations</option>
                 </select>
             </div>
-            <!-- Documentation Completeness: -->
             <div class="form-group">
                 <label for="techDoc">Documentation Completeness:</label>
                 <select id="techDoc" name="techDoc" class="form-control" onchange="calculateTotalScore()">
@@ -83,13 +80,62 @@
                 </select>
             </div>
             <!-- Version Control Practices -->
-
+            <h3>Version Control:</h3>
+            <div class="form-group row">
+                <label for="versionControlWeight" class="col-sm-4 col-form-label">Weight:</label>
+                <div class="col-sm-8">
+                    <input type="number" id="versionControlWeight" name="versionControlWeight" class="form-control" onchange="calculateTotalScore()">
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="branchingStrategy" class="col-sm-4 col-form-label">Branching Strategy:</label>
+                <div class="col-sm-8">
+                    <select id="branchingStrategy" name="branchingStrategy" class="form-control" onchange="calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">No branches (all work on main)</option>
+                        <option value="2">Ad hoc branching</option>
+                        <option value="3">Defined branching strategy (e.g., GitFlow)</option>
+                        <option value="4">Well-defined branching strategy with some cleanup</option>
+                        <option value="5">Strict and enforced branching strategy with regular cleanup</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="commitMessages" class="col-sm-4 col-form-label">Commit Messages:</label>
+                <div class="col-sm-8">
+                    <select id="commitMessages" name="commitMessages" class="form-control" onchange="calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">No commit messages or meaningless</option>
+                        <option value="2">Inconsistent commit messages</option>
+                        <option value="3">Meaningful commit messages</option>
+                        <option value="4">Standardized, meaningful commit messages</option>
+                        <option value="5">Standardized, meaningful commit messages with templates</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="pullRequests" class="col-sm-4 col-form-label">Pull Requests and Code Reviews:</label>
+                <div class="col-sm-8">
+                    <select id="pullRequests" name="pullRequests" class="form-control" onchange="calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">No pull requests or code reviews</option>
+                        <option value="2">Occasional pull requests and code reviews</option>
+                        <option value="3">Regular pull requests and code reviews</option>
+                        <option value="4">Mandatory pull requests and thorough code reviews</option>
+                        <option value="5">Mandatory pull requests and thorough code reviews for all changes</option>
+                    </select>
+                </div>
+            </div>
+            
             <!-- CI Pipeline and Quality Gates -->
             <h3>CI Pipeline and Quality Gates:</h3>
             <div class="form-group row">
                 <label for="buildPipelineScoreWeight" class="col-sm-4 col-form-label">Weight:</label>
                 <div class="col-sm-8">
-                    <input type="number" id="buildPipelineScoreWeight" name="buildPipelineScoreWeight" class="form-control" value="0.25" onchange="calculateTotalScore()">
+                    <input type="number" id="buildPipelineScoreWeight" name="buildPipelineScoreWeight" class="form-control" onchange="calculateTotalScore()">
                 </div>
             </div>
             <div class="form-group">
@@ -123,7 +169,7 @@
             <div class="form-group row">
                 <label for="languageScoreWeight" class="col-sm-4 col-form-label">Language and Frameworks Score:</label>
                 <div class="col-sm-8">
-                    <input type="number" id="languageScoreWeight" name="languageScoreWeight" class="form-control" value="0.30" onchange="calculateTotalScore()">
+                    <input type="number" id="languageScoreWeight" name="languageScoreWeight" class="form-control" onchange="calculateTotalScore()">
                 </div>
             </div>
             <div class="form-group">
@@ -133,20 +179,16 @@
                     <option value="Python">Python</option>
                     <option value="JavaScript">JavaScript</option>
                     <option value="Java">Java</option>
-                    <option value="TypeScript">TypeScript</option>
                     <option value=".Net">.Net</option>
                     <option value="PHP">PHP</option>
                     <option value="Ruby">Ruby</option>
-                    <option value="Perl">Perl</option>
-                    <option value="Golang">Golang</option>
-                    <option value="Swift">Swift</option>
-                    <option value="Kotlin">Kotlin</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="component">Component:</label>
                 <select id="component" name="component" class="form-control" onchange="updateFrameworks()">
                     <option value="0">Select</option>
+                    <option value="monolith">Monolith</option>
                     <option value="frontend">Frontend</option>
                     <option value="backend">Backend</option>
                 </select>
@@ -172,6 +214,51 @@
                 <input type="text" id="communitySupport" name="communitySupport" class="form-control" readonly>
             </div>
         </form>
+
+         <!-- Summary Table -->
+         <h3>Summary Table</h3>
+         <table class="table table-bordered">
+             <thead>
+                 <tr>
+                     <th>Criteria</th>
+                     <th>Weight</th>
+                     <th>Score</th>
+                     <th>Weighted Score</th>
+                 </tr>
+             </thead>
+             <tbody id="summaryTableBody">
+                 <tr>
+                     <td>Code Readability and Maintainability</td>
+                     <td id="codeQualityWeightDisplay">0.20</td>
+                     <td id="codeQualityScoreDisplay">0</td>
+                     <td id="codeQualityWeightedScoreDisplay">0</td>
+                 </tr>
+                 <tr>
+                     <td>CI/CD Pipeline</td>
+                     <td id="buildCIWeightDisplay">0.20</td>
+                     <td id="buildCIScoreDisplay">0</td>
+                     <td id="buildCIWeightedScoreDisplay">0</td>
+                 </tr>
+                 <tr>
+                     <td>Programming Language and Frameworks</td>
+                     <td id="languageFrameworkWeightDisplay">0.20</td>
+                     <td id="languageFrameworkScoreDisplay">0</td>
+                     <td id="languageFrameworkWeightedScoreDisplay">0</td>
+                 </tr>
+                 <tr>
+                     <td>Version Control</td>
+                     <td id="versionControlWeightDisplay">0.20</td>
+                     <td id="versionControlScoreDisplay">0</td>
+                     <td id="versionControlWeightedScoreDisplay">0</td>
+                 </tr>
+                 <tr>
+                     <td>Total</td>
+                     <td id="totalWeight">0</td>
+                     <td id="totalScore"></td>
+                     <td id="totalWeightedScore">0</td>
+                 </tr>
+             </tbody>
+         </table>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

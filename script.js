@@ -1,3 +1,8 @@
+const DEFAULT_CODE_SCORE_WEIGHT = 0.30;
+const DEFAULT_BUILD_PIPELINE_SCORE_WEIGHT = 0.20;
+const DEFAULT_LANGUAGE_SCORE_WEIGHT = 0.30;
+const DEFAULT_VERSION_CONTROL_WEIGHT = 0.20;
+
 const frameworks = {
     Python: {
         monolith: ["Django", "Flask", "Pyramid"],
@@ -114,12 +119,6 @@ const versions = {
         "2.x": { popularity: 5, support: 5 },
         "1.x": { popularity: 4, support: 4 }
     },
-    NestJS: {
-        "7.x": { popularity: 5, support: 5 },
-        "6.x": { popularity: 5, support: 5 },
-        "5.x": { popularity: 4, support: 4 },
-        "4.x and below": { popularity: 3, support: 3 }
-    },
     ".NET Core": {
         "5.x": { popularity: 5, support: 5 },
         "3.x": { popularity: 5, support: 5 },
@@ -169,46 +168,6 @@ const versions = {
         "2.x": { popularity: 4, support: 4 },
         "1.x": { popularity: 3, support: 3 }
     },
-    Catalyst: {
-        "5.x": { popularity: 4, support: 4 },
-        "4.x": { popularity: 4, support: 4 },
-        "3.x and below": { popularity: 3, support: 3 }
-    },
-    Mojolicious: {
-        "9.x": { popularity: 4, support: 4 },
-        "8.x": { popularity: 4, support: 4 },
-        "7.x and below": { popularity: 3, support: 3 }
-    },
-    Gin: {
-        "1.x": { popularity: 5, support: 5 }
-    },
-    Beego: {
-        "1.x": { popularity: 4, support: 4 }
-    },
-    Echo: {
-        "4.x": { popularity: 5, support: 5 },
-        "3.x": { popularity: 4, support: 4 },
-        "2.x and below": { popularity: 3, support: 3 }
-    },
-    SwiftUI: {
-        "3.x": { popularity: 5, support: 5 },
-        "2.x": { popularity: 4, support: 4 },
-        "1.x": { popularity: 3, support: 3 }
-    },
-    Vapor: {
-        "4.x": { popularity: 5, support: 5 },
-        "3.x": { popularity: 4, support: 4 },
-        "2.x and below": { popularity: 3, support: 3 }
-    },
-    Kitura: {
-        "3.x": { popularity: 4, support: 4 },
-        "2.x": { popularity: 4, support: 4 },
-        "1.x": { popularity: 3, support: 3 }
-    },
-    Ktor: {
-        "2.x": { popularity: 5, support: 5 },
-        "1.x": { popularity: 4, support: 4 }
-    },
     Meteor: {
         "2.x": { popularity: 5, support: 5 },
         "1.x": { popularity: 4, support: 4 }
@@ -237,6 +196,13 @@ const versions = {
         "4.x and below": { popularity: 3, support: 3 }
     }
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('codeScoreWeight').value = DEFAULT_CODE_SCORE_WEIGHT;
+    document.getElementById('buildPipelineScoreWeight').value = DEFAULT_BUILD_PIPELINE_SCORE_WEIGHT;
+    document.getElementById('languageScoreWeight').value = DEFAULT_LANGUAGE_SCORE_WEIGHT;
+    document.getElementById('versionControlWeight').value = DEFAULT_VERSION_CONTROL_WEIGHT;
+});
 
 function updateComponents() {
     const language = document.getElementById('language').value;
@@ -281,26 +247,27 @@ function showScores() {
         document.getElementById('popularity').value = popularity;
         document.getElementById('communitySupport').value = support;
     }
-    calculateTotalScore()
+    calculateTotalScore();
 }
-
 
 function calculateTotalScore() {
     const sections = {
-        codeScore: ["codeSmells", "testCoverage", "bestPractices", "techDoc"],
-        buildState: ["ciPipeline", 'buildState'],
-        languageScore: ["popularity", "communitySupport"],
+        codeQuality: ["codeSmells", "testCoverage", "bestPractices", "techDoc"],
+        buildCI: ["ciPipeline", 'buildState'],
+        languageFramework: ["popularity", "communitySupport"],
         versionControl: ["branchingStrategy", "commitMessages", "pullRequests"]
     };
 
     const weights = {
-        codeScore: parseFloat(document.getElementById('codeScoreWeight').value) || 0.20,
-        buildState: parseFloat(document.getElementById('buildPipelineScoreWeight').value) || 0.20,
-        languageScore: parseFloat(document.getElementById('languageScoreWeight').value) || 0.20,
-        versionControl: parseFloat(document.getElementById('versionControlWeight').value) || 0.20
+        codeQuality: parseFloat(document.getElementById('codeScoreWeight').value) || DEFAULT_CODE_SCORE_WEIGHT,
+        buildCI: parseFloat(document.getElementById('buildPipelineScoreWeight').value) || DEFAULT_BUILD_PIPELINE_SCORE_WEIGHT,
+        languageFramework: parseFloat(document.getElementById('languageScoreWeight').value) || DEFAULT_LANGUAGE_SCORE_WEIGHT,
+        versionControl: parseFloat(document.getElementById('versionControlWeight').value) || DEFAULT_VERSION_CONTROL_WEIGHT
     };
 
+    let totalWeight = 0;
     let totalScore = 0;
+    let totalWeightedScore = 0;
 
     for (let section in sections) {
         let sectionScore = 0;
@@ -316,10 +283,23 @@ function calculateTotalScore() {
 
         if (count > 0) {
             const averageScore = sectionScore / count;
-            totalScore += averageScore * weights[section];
+            const weightedScore = averageScore * weights[section];
+
+            // Update individual section scores
+            document.getElementById(`${section}WeightDisplay`).textContent = weights[section].toFixed(2);
+            document.getElementById(`${section}ScoreDisplay`).textContent = averageScore.toFixed(2);
+            document.getElementById(`${section}WeightedScoreDisplay`).textContent = weightedScore.toFixed(2);
+
+            totalWeight += weights[section];
+            totalScore += averageScore;
+            totalWeightedScore += weightedScore;
         }
     }
 
-    document.getElementById('totalScore').textContent = totalScore.toFixed(2);
-}
+    document.getElementById('totalScoreOnTop').textContent = totalWeightedScore.toFixed(2);
 
+    // Update total scores
+    document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
+    //document.getElementById('totalScore').textContent = totalScore.toFixed(2);
+    document.getElementById('totalWeightedScore').textContent = totalWeightedScore.toFixed(2);
+}
