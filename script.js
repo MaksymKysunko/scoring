@@ -1,6 +1,6 @@
-const DEFAULT_CODE_SCORE_WEIGHT = 0.30;
-const DEFAULT_BUILD_PIPELINE_SCORE_WEIGHT = 0.20;
-const DEFAULT_LANGUAGE_SCORE_WEIGHT = 0.30;
+const DEFAULT_CODE_QUALITY_WEIGHT = 0.30;
+const DEFAULT_BUILD_CI_SCORE_WEIGHT = 0.20;
+const DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT = 0.30;
 const DEFAULT_VERSION_CONTROL_WEIGHT = 0.20;
 
 const frameworks = {
@@ -102,23 +102,6 @@ const versions = {
         "4.x": { popularity: 4, support: 4 },
         "3.x and below": { popularity: 3, support: 3 }
     },
-    Angular: {
-        "11.x": { popularity: 5, support: 5 },
-        "10.x": { popularity: 5, support: 5 },
-        "9.x": { popularity: 4, support: 4 },
-        "8.x and below": { popularity: 3, support: 3 }
-    },
-    React: {
-        "17.x": { popularity: 5, support: 5 },
-        "16.x": { popularity: 5, support: 5 },
-        "15.x": { popularity: 4, support: 4 },
-        "14.x and below": { popularity: 3, support: 3 }
-    },
-    Vue: {
-        "3.x": { popularity: 5, support: 5 },
-        "2.x": { popularity: 5, support: 5 },
-        "1.x": { popularity: 4, support: 4 }
-    },
     ".NET Core": {
         "5.x": { popularity: 5, support: 5 },
         "3.x": { popularity: 5, support: 5 },
@@ -198,10 +181,17 @@ const versions = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('codeScoreWeight').value = DEFAULT_CODE_SCORE_WEIGHT;
-    document.getElementById('buildPipelineScoreWeight').value = DEFAULT_BUILD_PIPELINE_SCORE_WEIGHT;
-    document.getElementById('languageScoreWeight').value = DEFAULT_LANGUAGE_SCORE_WEIGHT;
+    // setting score values as default for input fields
+    document.getElementById('codeQualityWeight').value = DEFAULT_CODE_QUALITY_WEIGHT;
+    document.getElementById('buildCIWeight').value = DEFAULT_BUILD_CI_SCORE_WEIGHT;
+    document.getElementById('languageFrameworkWeight').value = DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT;
     document.getElementById('versionControlWeight').value = DEFAULT_VERSION_CONTROL_WEIGHT;
+
+    //setting weight default values for the result table
+    document.getElementById('codeQualityWeightDisplay').textContent = DEFAULT_CODE_QUALITY_WEIGHT.toFixed(2);
+    document.getElementById('buildCIWeightDisplay').textContent = DEFAULT_BUILD_CI_SCORE_WEIGHT.toFixed(2);
+    document.getElementById('languageFrameworkWeightDisplay').textContent = DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT.toFixed(2);
+    document.getElementById('versionControlWeightDisplay').textContent = DEFAULT_VERSION_CONTROL_WEIGHT.toFixed(2);
 });
 
 function updateComponents() {
@@ -252,21 +242,20 @@ function showScores() {
 
 function calculateTotalScore() {
     const sections = {
-        codeQuality: ["codeSmells", "testCoverage", "bestPractices", "techDoc"],
+        codeQuality: ["securityScore","reliabilityScore","maintenabilityScore", "securityHotspotsScore", "testCoverage",  "techDoc"],
         buildCI: ["ciPipeline", 'buildState'],
         languageFramework: ["popularity", "communitySupport"],
         versionControl: ["branchingStrategy", "commitMessages", "pullRequests"]
     };
 
     const weights = {
-        codeQuality: parseFloat(document.getElementById('codeScoreWeight').value) || DEFAULT_CODE_SCORE_WEIGHT,
-        buildCI: parseFloat(document.getElementById('buildPipelineScoreWeight').value) || DEFAULT_BUILD_PIPELINE_SCORE_WEIGHT,
-        languageFramework: parseFloat(document.getElementById('languageScoreWeight').value) || DEFAULT_LANGUAGE_SCORE_WEIGHT,
+        codeQuality: parseFloat(document.getElementById('codeQualityWeight').value) || DEFAULT_CODE_QUALITY_WEIGHT,
+        buildCI: parseFloat(document.getElementById('buildCIWeight').value) || DEFAULT_BUILD_CI_SCORE_WEIGHT,
+        languageFramework: parseFloat(document.getElementById('languageFrameworkWeight').value) || DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT,
         versionControl: parseFloat(document.getElementById('versionControlWeight').value) || DEFAULT_VERSION_CONTROL_WEIGHT
     };
 
     let totalWeight = 0;
-    let totalScore = 0;
     let totalWeightedScore = 0;
 
     for (let section in sections) {
@@ -285,21 +274,32 @@ function calculateTotalScore() {
             const averageScore = sectionScore / count;
             const weightedScore = averageScore * weights[section];
 
-            // Update individual section scores
-            document.getElementById(`${section}WeightDisplay`).textContent = weights[section].toFixed(2);
+            totalWeightedScore += weightedScore;
+
+            // Update individual section score
             document.getElementById(`${section}ScoreDisplay`).textContent = averageScore.toFixed(2);
             document.getElementById(`${section}WeightedScoreDisplay`).textContent = weightedScore.toFixed(2);
-
-            totalWeight += weights[section];
-            totalScore += averageScore;
-            totalWeightedScore += weightedScore;
         }
+        
+        // Update individual section weight 
+        totalWeight += weights[section];
+        document.getElementById(`${section}WeightDisplay`).textContent = weights[section].toFixed(2);
+
     }
 
     document.getElementById('totalScoreOnTop').textContent = totalWeightedScore.toFixed(2);
 
     // Update total scores
     document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
-    //document.getElementById('totalScore').textContent = totalScore.toFixed(2);
     document.getElementById('totalWeightedScore').textContent = totalWeightedScore.toFixed(2);
 }
+
+// Export functions for use in HTML
+/* exported updateComponents */
+window.updateComponents = updateComponents;
+/* exported updateFrameworks */
+window.updateFrameworks = updateFrameworks;
+/* exported pdateVersions*/
+window.updateVersions = updateVersions;
+/* exported showScores */
+window.showScores = showScores;
