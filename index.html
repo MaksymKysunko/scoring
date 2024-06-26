@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label for="security">
-                    <a href="https://docs.sonarsource.com/sonarqube/9.8/user-guide/metric-definitions/#security" target="_blank">
+                    <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#security" target="_blank">
                         Security
                     </a>
                 </label>
@@ -51,7 +51,7 @@
             </div>
             <div class="form-group">
                 <label for="reliability">
-                    <a href="https://docs.sonarsource.com/sonarqube/9.8/user-guide/metric-definitions/#reliability" target="_blank">
+                    <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#reliability" target="_blank">
                         Reliability
                     </a>
                 </label>
@@ -67,7 +67,7 @@
             <!-- Code Readability and Maintainability -->
             <div class="form-group">
                 <label for="Maintenability">
-                    <a href="https://docs.sonarsource.com/sonarqube/9.8/user-guide/metric-definitions/#maintainability" target="_blank">
+                    <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#maintainability" target="_blank">
                         Maintenability
                     </a>
                 </label>
@@ -82,7 +82,7 @@
             </div>
             <div class="form-group">
                 <label for="securityHotspots">
-                    <a href="https://docs.sonarsource.com/sonarqube/9.8/user-guide/metric-definitions/#security" target="_blank">
+                    <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#security-review" target="_blank">
                         Security Hotspots
                     </a>
                 </label>
@@ -108,8 +108,12 @@
             </div>
 
             <div class="form-group">
-                <label for="techDoc">Documentation Completeness:</label>
-                <select id="techDoc" name="techDoc" class="form-control" onchange="window.calculateTotalScore()">
+                <label for="commentsDensity">
+                    <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#size" target="_blank">
+                        Comments density
+                    </a>
+                </label>
+                <select id="commentsDensity" name="commentsDensity" class="form-control" onchange="window.calculateTotalScore()">
                     <option value="0">Select</option>
                     <option value="1">&lt; 10% comments density</option>
                     <option value="2">10-20% comments density</option>
