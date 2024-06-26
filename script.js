@@ -242,7 +242,7 @@ function showScores() {
 
 function calculateTotalScore() {
     const sections = {
-        codeQuality: ["securityScore","reliabilityScore","maintenabilityScore", "securityHotspotsScore", "testCoverage",  "commentsDensity"],
+        codeQuality: ["securityScore","reliabilityScore","MaintanabilityScore", "securityHotspotsScore", "testCoverage",  "commentsDensity"],
         buildCI: ["ciPipeline", 'buildState'],
         languageFramework: ["popularity", "communitySupport"],
         versionControl: ["branchingStrategy", "commitMessages", "pullRequests"]
