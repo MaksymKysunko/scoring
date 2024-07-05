@@ -21,13 +21,14 @@
     </head>
 <body>
     <div class="fixed-score">
-        <h3>Total Score: <span id="totalScoreOnTop">0.00</span></h3>
+        <h3>Project Grade: <span id="totalScoreOnTop"> ? </span></h3>
     </div>
     <div class="container mt-5">
         <h1 class="text-center">Web Application Scoring</h1>
             <!-- Scoring form -->
             <form id="scoringForm" class="mt-4">
-            <h3>Code base evaluation:</h3>
+            <!-- Codebase evaluation section -->
+            <h3>Codebase evaluation:</h3>
             <div class="form-group row">
                 <label for="codeQualityWeight" class="col-sm-4 col-form-label">Weight:</label>
                 <div class="col-sm-8">
@@ -206,6 +207,26 @@
                 </select>
             </div>
  
+             <!-- Deploymemnt automationm -->
+             <h3>Deployment Aytomation:</h3>
+             <div class="form-group row">
+                 <label for="deploymentWeight" class="col-sm-4 col-form-label">Weight:</label>
+                 <div class="col-sm-8">
+                     <input type="number" id="deploymentWeight" name="deploymentWeight" class="form-control" onchange="window.calculateTotalScore()">
+                 </div>
+             </div>
+            <!-- Deployment Evaluation -->
+            <div class="form-group">
+                <label for="deploymentScore">Deployment Evaluation</label>
+                <select id="deploymentScore" name="deploymentScore" class="form-control" onchange="calculateTotalScore()">
+                    <option value="0">Select</option>
+                    <option value="1">Manual deployment with production stop</option>
+                    <option value="2">Manual deployment with staging environment</option>
+                    <option value="3">Automated pipeline without health checks</option>
+                    <option value="4">Automated pipeline with basic health checks</option>
+                    <option value="5">Full pipeline with QA, canary deployments, and rollback capabilities</option>
+                </select>
+            </div>
 
             <!-- Programming Language and Framework Selection -->
             <h3>Programming Language and Framework</h3>
@@ -282,6 +303,12 @@
                      <td id="buildCIScoreDisplay">0</td>
                      <td id="buildCIWeightedScoreDisplay">0</td>
                  </tr>
+                 <tr>
+                    <td>Deployment</td>
+                    <td id="deploymentWeightDisplay">0</td>
+                    <td id="deploymentScoreDisplay">0</td>
+                    <td id="deploymentWeightedScoreDisplay">0</td>
+                </tr>
                  <tr>
                      <td>Programming Language and Frameworks</td>
                      <td id="languageFrameworkWeightDisplay">0</td>

@@ -1,6 +1,7 @@
-const DEFAULT_CODE_QUALITY_WEIGHT = 0.30;
+const DEFAULT_CODE_QUALITY_WEIGHT = 0.20;
 const DEFAULT_BUILD_CI_SCORE_WEIGHT = 0.20;
-const DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT = 0.30;
+const DEFAULT_DEPLOYMENT_WEIGHT = 0.20;
+const DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT = 0.20;
 const DEFAULT_VERSION_CONTROL_WEIGHT = 0.20;
 
 const frameworks = {
@@ -184,13 +185,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // setting score values as default for input fields
     document.getElementById('codeQualityWeight').value = DEFAULT_CODE_QUALITY_WEIGHT;
     document.getElementById('buildCIWeight').value = DEFAULT_BUILD_CI_SCORE_WEIGHT;
+    document.getElementById('deploymentWeight').value = DEFAULT_DEPLOYMENT_WEIGHT;
     document.getElementById('languageFrameworkWeight').value = DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT;
     document.getElementById('versionControlWeight').value = DEFAULT_VERSION_CONTROL_WEIGHT;
 
     //setting weight default values for the result table
     document.getElementById('codeQualityWeightDisplay').textContent = DEFAULT_CODE_QUALITY_WEIGHT.toFixed(2);
     document.getElementById('buildCIWeightDisplay').textContent = DEFAULT_BUILD_CI_SCORE_WEIGHT.toFixed(2);
-    document.getElementById('languageFrameworkWeightDisplay').textContent = DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT.toFixed(2);
+    document.getElementById('deploymentWeightDisplay').textContent = DEFAULT_BUILD_CI_SCORE_WEIGHT.toFixed(2);
+        document.getElementById('languageFrameworkWeightDisplay').textContent = DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT.toFixed(2);
     document.getElementById('versionControlWeightDisplay').textContent = DEFAULT_VERSION_CONTROL_WEIGHT.toFixed(2);
 });
 
@@ -240,10 +243,19 @@ function showScores() {
     calculateTotalScore();
 }
 
+function getGrade(score) {
+    if (score <= 2) return 'E';
+    if (score <= 3) return 'D';
+    if (score <= 4) return 'C';
+    if (score < 5) return 'B';
+    return 'A';
+}
+
 function calculateTotalScore() {
     const sections = {
         codeQuality: ["securityScore","reliabilityScore","MaintanabilityScore", "securityHotspotsScore", "testCoverage",  "commentsDensity"],
         buildCI: ["ciPipeline", 'buildState'],
+        deployment: ["deploymentScore"],
         languageFramework: ["popularity", "communitySupport"],
         versionControl: ["branchingStrategy", "commitMessages", "pullRequests"]
     };
@@ -251,6 +263,7 @@ function calculateTotalScore() {
     const weights = {
         codeQuality: parseFloat(document.getElementById('codeQualityWeight').value) || DEFAULT_CODE_QUALITY_WEIGHT,
         buildCI: parseFloat(document.getElementById('buildCIWeight').value) || DEFAULT_BUILD_CI_SCORE_WEIGHT,
+        deployment: parseFloat(document.getElementById('buildCIWeight').value) || DEFAULT_DEPLOYMENT_WEIGHT,
         languageFramework: parseFloat(document.getElementById('languageFrameworkWeight').value) || DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT,
         versionControl: parseFloat(document.getElementById('versionControlWeight').value) || DEFAULT_VERSION_CONTROL_WEIGHT
     };
@@ -287,7 +300,7 @@ function calculateTotalScore() {
 
     }
 
-    document.getElementById('totalScoreOnTop').textContent = totalWeightedScore.toFixed(2);
+    document.getElementById('totalScoreOnTop').textContent = getGrade(totalWeightedScore);
 
     // Update total scores
     document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
