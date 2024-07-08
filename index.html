@@ -100,11 +100,11 @@
                 <label for="testCoverage">Test Coverage (Unit tests)</label>
                 <select id="testCoverage" name="testCoverage" class="form-control" onchange="window.calculateTotalScore()">
                     <option value="0">Select</option>
-                    <option value="1">&lt; 20% coverage</option>
-                    <option value="2">20-40% coverage</option>
-                    <option value="3">40-60% coverage</option>
-                    <option value="4">60-80% coverage</option>
-                    <option value="5">&gt; 80% coverage</option>
+                    <option value="1">E = &lt; 20% coverage</option>
+                    <option value="2">D = 20-40% coverage</option>
+                    <option value="3">C = 40-60% coverage</option>
+                    <option value="4">B = 60-80% coverage</option>
+                    <option value="5">A = &gt; 80% coverage</option>
                 </select>
             </div>
 
@@ -116,11 +116,11 @@
                 </label>
                 <select id="commentsDensity" name="commentsDensity" class="form-control" onchange="window.calculateTotalScore()">
                     <option value="0">Select</option>
-                    <option value="1">&lt; 10% comments density</option>
-                    <option value="2">10-20% comments density</option>
-                    <option value="3">20-30% comments density</option>
-                    <option value="4">30-40% comments density</option>
-                    <option value="5">&gt; 40% comments density</option>
+                    <option value="1">E = &lt; 10% comments density</option>
+                    <option value="2">D = 10-20% comments density</option>
+                    <option value="3">C = 20-30% comments density</option>
+                    <option value="4">B = 30-40% comments density</option>
+                    <option value="5">A = &gt; 40% comments density</option>
                 </select>
             </div>
             <!-- Version Control Practices -->
@@ -137,11 +137,11 @@
                 <div class="col-sm-8">
                     <select id="branchingStrategy" name="branchingStrategy" class="form-control" onchange="window.calculateTotalScore()">
                         <option value="0">Select</option>
-                        <option value="1">No branches (all work on main)</option>
-                        <option value="2">Ad hoc branching</option>
-                        <option value="3">Defined branching strategy (e.g., GitFlow)</option>
-                        <option value="4">Well-defined branching strategy with some cleanup</option>
-                        <option value="5">Strict and enforced branching strategy with regular cleanup</option>
+                        <option value="1">E = No branches (all work on main)</option>
+                        <option value="2">D = Ad hoc branching</option>
+                        <option value="3">C = Defined branching strategy (e.g., GitFlow)</option>
+                        <option value="4">B = Well-defined branching strategy with some cleanup</option>
+                        <option value="5">A = Strict and enforced branching strategy with regular cleanup</option>
                     </select>
                 </div>
             </div>
@@ -151,11 +151,11 @@
                 <div class="col-sm-8">
                     <select id="commitMessages" name="commitMessages" class="form-control" onchange="window.calculateTotalScore()">
                         <option value="0">Select</option>
-                        <option value="1">No commit messages or meaningless</option>
-                        <option value="2">Inconsistent commit messages</option>
-                        <option value="3">Meaningful commit messages</option>
-                        <option value="4">Standardized, meaningful commit messages</option>
-                        <option value="5">Standardized, meaningful commit messages with templates</option>
+                        <option value="1">E = No commit messages or meaningless</option>
+                        <option value="2">D = Inconsistent commit messages</option>
+                        <option value="3">C = Meaningful commit messages</option>
+                        <option value="4">B = Standardized, meaningful commit messages</option>
+                        <option value="5">A = Standardized, meaningful commit messages with templates</option>
                     </select>
                 </div>
             </div>
@@ -165,11 +165,11 @@
                 <div class="col-sm-8">
                     <select id="pullRequests" name="pullRequests" class="form-control" onchange="window.calculateTotalScore()">
                         <option value="0">Select</option>
-                        <option value="1">No pull requests or code reviews</option>
-                        <option value="2">Occasional pull requests and code reviews</option>
-                        <option value="3">Regular pull requests and code reviews</option>
-                        <option value="4">Mandatory pull requests and thorough code reviews</option>
-                        <option value="5">Mandatory pull requests and thorough code reviews for all changes</option>
+                        <option value="1">E = No pull requests or code reviews</option>
+                        <option value="2">D = Occasional pull requests and code reviews</option>
+                        <option value="3">C = Regular pull requests and code reviews</option>
+                        <option value="4">B = Mandatory pull requests and thorough code reviews</option>
+                        <option value="5">A = Mandatory pull requests and thorough code reviews for all changes</option>
                     </select>
                 </div>
             </div>
@@ -186,11 +186,11 @@
                 <label for="ciPipeline">CI Pipeline and Quality Gates:</label>
                 <select id="ciPipeline" name="ciPipeline" class="form-control" onchange="window.calculateTotalScore()">
                     <option value="0">Select</option>
-                    <option value="1">No CI pipeline</option>
-                    <option value="2">CI pipeline configured but manual execution</option>
-                    <option value="3">CI pipeline with automatic builds and automated tests</option>
-                    <option value="4">CI pipeline with quality gates</option>
-                    <option value="5">CI pipeline with advanced reporting and notifications</option>
+                    <option value="1">E = No CI pipeline</option>
+                    <option value="2">D = CI pipeline configured but manual execution</option>
+                    <option value="3">C = CI pipeline with automatic builds and automated tests</option>
+                    <option value="4">B = CI pipeline with quality gates</option>
+                    <option value="5">A = CI pipeline with advanced reporting and notifications</option>
                 </select>
             </div>
 
@@ -199,11 +199,11 @@
                 <label for="buildState">Build State:</label>
                 <select id="buildState" name="buildState" class="form-control" onchange="window.calculateTotalScore()">
                     <option value="0">Select</option>
-                    <option value="1">CI does not exist</option>
-                    <option value="2">CI configured but build fails because of missing dependencies</option>
-                    <option value="3">CI exists but build fails because of incompatible dependencies</option>
-                    <option value="4">Build succeeds but with warnings or minor issues</option>
-                    <option value="5">Build succeeds without issues</option>
+                    <option value="1">E = CI does not exist</option>
+                    <option value="2">D = CI configured but build fails because of missing dependencies</option>
+                    <option value="3">C = CI exists but build fails because of incompatible dependencies</option>
+                    <option value="4">B = Build succeeds but with warnings or minor issues</option>
+                    <option value="5">A = Build succeeds without issues</option>
                 </select>
             </div>
  
@@ -220,11 +220,11 @@
                 <label for="deploymentScore">Deployment Evaluation</label>
                 <select id="deploymentScore" name="deploymentScore" class="form-control" onchange="calculateTotalScore()">
                     <option value="0">Select</option>
-                    <option value="1">Manual deployment with production stop</option>
-                    <option value="2">Manual deployment with staging environment</option>
-                    <option value="3">Automated pipeline without health checks</option>
-                    <option value="4">Automated pipeline with basic health checks</option>
-                    <option value="5">Full pipeline with QA, canary deployments, and rollback capabilities</option>
+                    <option value="1">E = Manual deployment with production stop</option>
+                    <option value="2">D = Manual deployment with staging environment</option>
+                    <option value="3">C = Automated pipeline without health checks</option>
+                    <option value="4">B = Automated pipeline with basic health checks</option>
+                    <option value="5">A = Full pipeline with QA, canary deployments, and rollback capabilities</option>
                 </select>
             </div>
 
@@ -253,11 +253,12 @@
                 <div class="col-sm-8">
                     <select id="popularity" name="popularity" class="form-control" onchange="calculateTotalScore()">
                         <option value="0">Select</option>
-                        <option value="5">A - Widely used with a large and active community</option>
-                        <option value="4">B - Moderately popular with a reasonably active community</option>
-                        <option value="3">C - Somewhat popular with a smaller community</option>
-                        <option value="2">D - Rarely used with a minimal community</option>
                         <option value="1">E - Almost never used with an inactive or non-existent community</option>
+                        <option value="2">D - Rarely used with a minimal community</option>
+                        <option value="3">C - Somewhat popular with a smaller community</option>
+                        <option value="4">B - Moderately popular with a reasonably active community</option>
+                        <option value="5">A - Widely used with a large and active community</option>
+
                     </select>
                 </div>
             </div>
@@ -266,11 +267,11 @@
                 <div class="col-sm-8">
                     <select id="support" name="support" class="form-control" onchange="calculateTotalScore()">
                         <option value="0">Select</option>
-                        <option value="5">A - Excellent official support and active community support channels</option>
-                        <option value="4">B - Good official support and active community support channels</option>
-                        <option value="3">C - Adequate support with some community activity</option>
-                        <option value="2">D - Limited support and minimal community activity</option>
                         <option value="1">E - Poor support and negligible community activity</option>
+                        <option value="2">D - Limited support and minimal community activity</option>
+                        <option value="3">C - Adequate support with some community activity</option>
+                        <option value="4">B - Good official support and active community support channels</option>
+                        <option value="5">A - Excellent official support and active community support channels</option>
                     </select>
                 </div>
             </div>
@@ -279,11 +280,11 @@
                 <div class="col-sm-8">
                     <select id="performance" name="performance" class="form-control" onchange="calculateTotalScore()">
                         <option value="0">Select</option>
-                        <option value="5">A - Known for excellent performance and efficiency</option>
-                        <option value="4">B - Generally good performance with minor inefficiencies</option>
-                        <option value="3">C - Average performance, suitable for most tasks</option>
-                        <option value="2">D - Below-average performance, may have significant inefficiencies</option>
                         <option value="1">E - Poor performance, generally not recommended for performance-critical applications</option>
+                        <option value="2">D - Below-average performance, may have significant inefficiencies</option>
+                        <option value="3">C - Average performance, suitable for most tasks</option>
+                        <option value="4">B - Generally good performance with minor inefficiencies</option>
+                        <option value="5">A - Known for excellent performance and efficiency</option>
                     </select>
                 </div>
             </div>
@@ -292,11 +293,11 @@
                 <div class="col-sm-8">
                     <select id="easeOfUse" name="easeOfUse" class="form-control" onchange="calculateTotalScore()">
                         <option value="0">Select</option>
-                        <option value="5">A - Easy to learn and use, even for beginners</option>
-                        <option value="4">B - Moderately easy to learn, with some complexities</option>
-                        <option value="3">C - Average learning curve, suitable for developers with some experience</option>
-                        <option value="2">D - Steep learning curve, may be challenging for beginners</option>
                         <option value="1">E - Very difficult to learn and use, even for experienced developers</option>
+                        <option value="2">D - Steep learning curve, may be challenging for beginners</option>
+                        <option value="3">C - Average learning curve, suitable for developers with some experience</option>
+                        <option value="4">B - Moderately easy to learn, with some complexities</option>
+                        <option value="5">A - Easy to learn and use, even for beginners</option>
                     </select>
                 </div>
             </div>

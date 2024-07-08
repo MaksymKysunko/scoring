@@ -79,17 +79,18 @@ function calculateTotalScore() {
 
             // Update individual section weighted score
             document.getElementById(`${section}WeightedScoreDisplay`).textContent = weightedScore.toFixed(2);
+            document.getElementById(`${section}ScoreDisplay`).textContent = sectionScores[section].toFixed(2);
         } else {
             document.getElementById(`${section}WeightedScoreDisplay`).textContent = '0';
+            document.getElementById(`${section}ScoreDisplay`).textContent = '0';
         }
 
         // Update individual section weight
         document.getElementById(`${section}WeightDisplay`).textContent = weights[section].toFixed(2);
     }
 
-    const finalScore = totalWeightedScore / totalWeight;
 
-    document.getElementById('gradeOnTop').textContent = getGrade(finalScore);
+    document.getElementById('gradeOnTop').textContent = getGrade(totalWeightedScore);
 
     // Update total scores
     document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
