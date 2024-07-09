@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function getGrade(score) {
-    if (score <= 2) return 'E';
-    if (score <= 3) return 'D';
-    if (score <= 4) return 'C';
+    if (score < 2) return 'E';
+    if (score < 3) return 'D';
+    if (score < 4) return 'C';
     if (score < 5) return 'B';
     return 'A';
 }
@@ -79,10 +79,10 @@ function calculateTotalScore() {
 
             // Update individual section weighted score
             document.getElementById(`${section}WeightedScoreDisplay`).textContent = weightedScore.toFixed(2);
-            document.getElementById(`${section}ScoreDisplay`).textContent = sectionScores[section].toFixed(2);
+            document.getElementById(`${section}GradeDisplay`).textContent = getGrade(sectionScores[section].toFixed(2));
         } else {
             document.getElementById(`${section}WeightedScoreDisplay`).textContent = '0';
-            document.getElementById(`${section}ScoreDisplay`).textContent = '0';
+            document.getElementById(`${section}GradeDisplay`).textContent = '';
         }
 
         // Update individual section weight
@@ -94,6 +94,7 @@ function calculateTotalScore() {
 
     // Update total scores
     document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
+    document.getElementById('totalGrade').textContent = getGrade(totalWeightedScore);
     document.getElementById('totalWeightedScore').textContent = totalWeightedScore.toFixed(2);
     //document.getElementById('totalScore').textContent = finalScore.toFixed(2);
 }
