@@ -1,3 +1,93 @@
+const sections = {
+    codeQuality: ["securityScore", "reliabilityScore", "MaintanabilityScore", "securityHotspotsScore", "testCoverage", "commentsDensity"],
+    buildCI: ["ciPipeline", "buildState"],
+    deployment: ["deploymentScore"],
+    languageFramework: ["popularity", "support", "performance", "easeOfUse"],
+    versionControl: ["branchingStrategy", "commitMessages", "pullRequests"]
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    const sectionKeys = Object.keys(sections);
+    const numberOfSections = sectionKeys.length;
+    const calculatedWeight = (100 / numberOfSections).toFixed(2);
+
+    sectionKeys.forEach(section => {
+        document.getElementById(`${section}Weight`).value = calculatedWeight;
+        document.getElementById(`${section}WeightDisplay`).textContent = calculatedWeight;
+    });
+
+    // Set default values for summary table weights
+    calculateTotalScore();
+});
+
+function getGrade(score) {
+    if (score < 2) return 'E';
+    if (score < 3) return 'D';
+    if (score < 4) return 'C';
+    if (score < 5) return 'B';
+    return 'A';
+}
+
+function calculateTotalScore() {
+    let sectionScores = {};
+    let totalWeightedScore = 0;
+    let totalWeight = 0;
+
+    // First iteration: Collect scores and total weight
+    for (let section in sections) {
+        sectionScores[section] = 0;
+        let count = 0;
+
+        sections[section].forEach(param => {
+            const value = parseInt(document.getElementById(param).value);
+            if (value) {
+                sectionScores[section] += value;
+                count++;
+            }
+        });
+
+        if (count > 0) {
+            const weight = parseFloat(document.getElementById(`${section}Weight`).value);
+            totalWeight += weight;
+            sectionScores[section] = sectionScores[section] / count;
+        }
+    }
+
+    // Second iteration: Calculate and display weighted scores
+    for (let section in sections) {
+        if (sectionScores[section] > 0) {
+            const weight = parseFloat(document.getElementById(`${section}Weight`).value);
+            const weightedScore = sectionScores[section] * weight/ totalWeight;
+            totalWeightedScore += weightedScore;
+
+            // Update individual section weighted score
+            document.getElementById(`${section}WeightedScoreDisplay`).textContent = (weightedScore).toFixed(2);
+            document.getElementById(`${section}GradeDisplay`).textContent = getGrade(sectionScores[section]);
+        } else {
+            document.getElementById(`${section}WeightedScoreDisplay`).textContent = '0';
+            document.getElementById(`${section}GradeDisplay`).textContent = '';
+        }
+
+        // Update individual section weight
+        document.getElementById(`${section}WeightDisplay`).textContent = parseFloat(document.getElementById(`${section}Weight`).value).toFixed(2);
+    }
+
+    const finalScore = totalWeightedScore;
+    if (finalScore > 0) {
+        document.getElementById('gradeOnTop').textContent = getGrade(finalScore);
+        document.getElementById('totalGrade').textContent = getGrade(finalScore);
+    }
+
+    // Update total scores
+    document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
+    document.getElementById('totalWeightedScore').textContent = totalWeightedScore.toFixed(2);
+}
+
+// Export functions for use in HTML
+/* exported calculateTotalScore */
+window.calculateTotalScore = calculateTotalScore;
+
+/*
 const DEFAULT_CODE_QUALITY_WEIGHT = 20;
 const DEFAULT_BUILD_CI_SCORE_WEIGHT = 20;
 const DEFAULT_DEPLOYMENT_WEIGHT = 20;
@@ -101,7 +191,8 @@ function calculateTotalScore() {
 
 
 // Export functions for use in HTML
-/* exported updateLanguageEvaluation */
+
 window.updateLanguageEvaluation = updateLanguageEvaluation;
-/* exported calculateTotalScore */
+
 window.calculateTotalScore = calculateTotalScore;
+*/
