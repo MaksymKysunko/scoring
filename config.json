@@ -1,0 +1,91 @@
+{
+    "sections": [
+      {
+        "name": "Codebase evaluation",
+        "id": "codeQuality",
+        "weight": 20,
+        "criteria": [
+          {
+            "label": "Security",
+            "id": "securityScore",
+            "options": [
+              {"value": 0, "label": "Select"},
+              {"value": 1, "label": "E = at least 1 Blocker Vulnerability"},
+              {"value": 2, "label": "D = at least 1 Critical Vulnerability"},
+              {"value": 3, "label": "C = at least 1 Major Vulnerability"},
+              {"value": 4, "label": "B = at least 1 Minor Vulnerability"},
+              {"value": 5, "label": "A = 0 Vulnerabilities"}
+            ]
+          },
+          {
+            "label": "Reliability",
+            "id": "reliabilityScore",
+            "options": [
+              {"value": 0, "label": "Select"},
+              {"value": 1, "label": "E = at least 1 Blocker Bug"},
+              {"value": 2, "label": "D = at least 1 Critical Bug"},
+              {"value": 3, "label": "C = at least 1 Major Bug"},
+              {"value": 4, "label": "B = at least 1 Minor Bug"},
+              {"value": 5, "label": "A = 0 Bugs"}
+            ]
+          },
+          {
+            "label": "Maintainability",
+            "id": "maintainabilityScore",
+            "options": [
+              {"value": 0, "label": "Select"},
+              {"value": 1, "label": "E = Technical debt ratio > 50%"},
+              {"value": 2, "label": "D = Technical debt ratio between 21 to 50%"},
+              {"value": 3, "label": "C = Technical debt ratio between 11 to 20%"},
+              {"value": 4, "label": "B = Technical debt ratio between 6 to 10%"},
+              {"value": 5, "label": "A = Technical debt ratio <= 5%"}
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Version Control",
+        "id": "versionControl",
+        "weight": 20,
+        "criteria": [
+          {
+            "label": "Branching Strategy",
+            "id": "branchingStrategy",
+            "options": [
+              {"value": 0, "label": "Select"},
+              {"value": 1, "label": "E = No branches (all work on main)"},
+              {"value": 2, "label": "D = Ad hoc branching"},
+              {"value": 3, "label": "C = Defined branching strategy (e.g., GitFlow)"},
+              {"value": 4, "label": "B = Well-defined branching strategy with some cleanup"},
+              {"value": 5, "label": "A = Strict and enforced branching strategy with regular cleanup"}
+            ]
+          },
+          {
+            "label": "Commit Messages",
+            "id": "commitMessages",
+            "options": [
+              {"value": 0, "label": "Select"},
+              {"value": 1, "label": "E = No commit messages or meaningless"},
+              {"value": 2, "label": "D = Inconsistent commit messages"},
+              {"value": 3, "label": "C = Meaningful commit messages"},
+              {"value": 4, "label": "B = Standardized, meaningful commit messages"},
+              {"value": 5, "label": "A = Standardized, meaningful commit messages with templates"}
+            ]
+          },
+          {
+            "label": "Pull Requests and Code Reviews",
+            "id": "pullRequests",
+            "options": [
+              {"value": 0, "label": "Select"},
+              {"value": 1, "label": "E = No pull requests or code reviews"},
+              {"value": 2, "label": "D = Occasional pull requests and code reviews"},
+              {"value": 3, "label": "C = Regular pull requests and code reviews"},
+              {"value": 4, "label": "B = Mandatory pull requests and thorough code reviews"},
+              {"value": 5, "label": "A = Mandatory pull requests and thorough code reviews for all changes"}
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  

@@ -1,24 +1,62 @@
-const sections = {
-    codeQuality: ["securityScore", "reliabilityScore", "MaintanabilityScore", "securityHotspotsScore", "testCoverage", "commentsDensity"],
-    buildCI: ["ciPipeline", "buildState"],
-    deployment: ["deploymentScore"],
-    languageFramework: ["popularity", "support", "performance", "easeOfUse"],
-    versionControl: ["branchingStrategy", "commitMessages", "pullRequests"]
-};
+const sections = {};
 
 document.addEventListener('DOMContentLoaded', function() {
+    fetch('config.json')
+        .then(response => response.json())
+        .then(data => {
+            sections = data.sections;
+            generateForm();
+            initializeWeights();
+        });
+});
+
+function generateForm() {
+    const form = document.getElementById('scoringForm');
+
+    sections.forEach(section => {
+        // Create section header
+        const sectionHeader = document.createElement('h3');
+        sectionHeader.textContent = section.name;
+        form.appendChild(sectionHeader);
+
+        // Create weight input
+        const weightDiv = document.createElement('div');
+        weightDiv.classList.add('form-group', 'row');
+        weightDiv.innerHTML = `
+            <label for="${section.id}Weight" class="col-sm-4 col-form-label">Weight:</label>
+            <div class="col-sm-8">
+                <input type="number" id="${section.id}Weight" name="${section.id}Weight" class="form-control" onchange="calculateTotalScore()">
+            </div>
+        `;
+        form.appendChild(weightDiv);
+
+        // Create criteria
+        section.criteria.forEach(criterion => {
+            const criterionDiv = document.createElement('div');
+            criterionDiv.classList.add('form-group');
+            criterionDiv.innerHTML = `
+                <label for="${criterion.id}">${criterion.label}</label>
+                <select id="${criterion.id}" name="${criterion.id}" class="form-control" onchange="calculateTotalScore()">
+                    ${criterion.options.map(option => `<option value="${option.value}">${option.label}</option>`).join('')}
+                </select>
+            `;
+            form.appendChild(criterionDiv);
+        });
+    });
+}
+
+function initializeWeights() {
     const sectionKeys = Object.keys(sections);
     const numberOfSections = sectionKeys.length;
     const calculatedWeight = (100 / numberOfSections).toFixed(2);
 
-    sectionKeys.forEach(section => {
-        document.getElementById(`${section}Weight`).value = calculatedWeight;
-        document.getElementById(`${section}WeightDisplay`).textContent = calculatedWeight;
+    sections.forEach(section => {
+        document.getElementById(`${section.id}Weight`).value = calculatedWeight;
+        document.getElementById(`${section.id}WeightDisplay`).textContent = calculatedWeight;
     });
 
-    // Set default values for summary table weights
     calculateTotalScore();
-});
+}
 
 function getGrade(score) {
     if (score < 2) return 'E';
@@ -33,166 +71,50 @@ function calculateTotalScore() {
     let totalWeightedScore = 0;
     let totalWeight = 0;
 
-    // First iteration: Collect scores and total weight
-    for (let section in sections) {
-        sectionScores[section] = 0;
+    sections.forEach(section => {
+        sectionScores[section.id] = 0;
         let count = 0;
 
-        sections[section].forEach(param => {
-            const value = parseInt(document.getElementById(param).value);
+        section.criteria.forEach(criterion => {
+            const value = parseInt(document.getElementById(criterion.id).value);
             if (value) {
-                sectionScores[section] += value;
+                sectionScores[section.id] += value;
                 count++;
             }
         });
 
         if (count > 0) {
-            const weight = parseFloat(document.getElementById(`${section}Weight`).value);
+            const weight = parseFloat(document.getElementById(`${section.id}Weight`).value);
             totalWeight += weight;
-            sectionScores[section] = sectionScores[section] / count;
+            sectionScores[section.id] = sectionScores[section.id] / count;
         }
-    }
+    });
 
-    // Second iteration: Calculate and display weighted scores
-    for (let section in sections) {
-        if (sectionScores[section] > 0) {
-            const weight = parseFloat(document.getElementById(`${section}Weight`).value);
-            const weightedScore = sectionScores[section] * weight/ totalWeight;
+    sections.forEach(section => {
+        if (sectionScores[section.id] > 0) {
+            const weight = parseFloat(document.getElementById(`${section.id}Weight`).value);
+            const weightedScore = sectionScores[section.id] * weight;
             totalWeightedScore += weightedScore;
 
-            // Update individual section weighted score
-            document.getElementById(`${section}WeightedScoreDisplay`).textContent = (weightedScore).toFixed(2);
-            document.getElementById(`${section}GradeDisplay`).textContent = getGrade(sectionScores[section]);
+            document.getElementById(`${section.id}WeightedScoreDisplay`).textContent = (weightedScore / totalWeight).toFixed(2);
+            document.getElementById(`${section.id}GradeDisplay`).textContent = getGrade(sectionScores[section.id].toFixed(2));
         } else {
-            document.getElementById(`${section}WeightedScoreDisplay`).textContent = '0';
-            document.getElementById(`${section}GradeDisplay`).textContent = '';
+            document.getElementById(`${section.id}WeightedScoreDisplay`).textContent = '0';
+            document.getElementById(`${section.id}GradeDisplay`).textContent = '';
         }
 
-        // Update individual section weight
-        document.getElementById(`${section}WeightDisplay`).textContent = parseFloat(document.getElementById(`${section}Weight`).value).toFixed(2);
-    }
+        document.getElementById(`${section.id}WeightDisplay`).textContent = parseFloat(document.getElementById(`${section.id}Weight`).value).toFixed(2);
+    });
 
-    const finalScore = totalWeightedScore;
-    if (finalScore > 0) {
-        document.getElementById('gradeOnTop').textContent = getGrade(finalScore);
-        document.getElementById('totalGrade').textContent = getGrade(finalScore);
-    }
+    const finalScore = totalWeightedScore / totalWeight;
 
-    // Update total scores
+    document.getElementById('gradeOnTop').textContent = getGrade(finalScore);
+
     document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
+    document.getElementById('totalGrade').textContent = getGrade(finalScore);
     document.getElementById('totalWeightedScore').textContent = totalWeightedScore.toFixed(2);
 }
 
 // Export functions for use in HTML
 /* exported calculateTotalScore */
 window.calculateTotalScore = calculateTotalScore;
-
-/*
-const DEFAULT_CODE_QUALITY_WEIGHT = 20;
-const DEFAULT_BUILD_CI_SCORE_WEIGHT = 20;
-const DEFAULT_DEPLOYMENT_WEIGHT = 20;
-const DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT = 20;
-const DEFAULT_VERSION_CONTROL_WEIGHT = 20;
-
-decimalsInWeight = 0
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // setting score values as default for input fields
-    document.getElementById('codeQualityWeight').value = DEFAULT_CODE_QUALITY_WEIGHT;
-    document.getElementById('buildCIWeight').value = DEFAULT_BUILD_CI_SCORE_WEIGHT;
-    document.getElementById('deploymentWeight').value = DEFAULT_DEPLOYMENT_WEIGHT;
-    document.getElementById('languageFrameworkWeight').value = DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT;
-    document.getElementById('versionControlWeight').value = DEFAULT_VERSION_CONTROL_WEIGHT;
-
-    //setting weight default values for the result table
-    document.getElementById('codeQualityWeightDisplay').textContent = DEFAULT_CODE_QUALITY_WEIGHT.toFixed(decimalsInWeight);
-    document.getElementById('buildCIWeightDisplay').textContent = DEFAULT_BUILD_CI_SCORE_WEIGHT.toFixed(decimalsInWeight);
-    document.getElementById('deploymentWeightDisplay').textContent = DEFAULT_BUILD_CI_SCORE_WEIGHT.toFixed(decimalsInWeight);
-        document.getElementById('languageFrameworkWeightDisplay').textContent = DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT.toFixed(decimalsInWeight);
-    document.getElementById('versionControlWeightDisplay').textContent = DEFAULT_VERSION_CONTROL_WEIGHT.toFixed(decimalsInWeight);
-});
-
-function getGrade(score) {
-    if (score < 2) return 'E';
-    if (score < 3) return 'D';
-    if (score < 4) return 'C';
-    if (score < 5) return 'B';
-    return 'A';
-}
-
-function calculateTotalScore() {
-    const sections = {
-        codeQuality: ["securityScore", "reliabilityScore", "MaintanabilityScore", "securityHotspotsScore", "testCoverage", "commentsDensity"],
-        buildCI: ["ciPipeline", "buildState"],
-        deployment: ["deploymentScore"],
-        languageFramework: ["popularity", "support", "performance", "easeOfUse"],
-        versionControl: ["branchingStrategy", "commitMessages", "pullRequests"]
-    };
-
-    const weights = {
-        codeQuality: parseFloat(document.getElementById('codeQualityWeight').value) || DEFAULT_CODE_QUALITY_WEIGHT,
-        buildCI: parseFloat(document.getElementById('buildCIWeight').value) || DEFAULT_BUILD_CI_SCORE_WEIGHT,
-        deployment: parseFloat(document.getElementById('deploymentWeight').value) || DEFAULT_DEPLOYMENT_WEIGHT,
-        languageFramework: parseFloat(document.getElementById('languageFrameworkWeight').value) || DEFAULT_LANGUAGE_FRAMEWORK_WEIGHT,
-        versionControl: parseFloat(document.getElementById('versionControlWeight').value) || DEFAULT_VERSION_CONTROL_WEIGHT
-    };
-
-    let sectionScores = {};
-    let totalWeightedScore = 0;
-    let totalWeight = 0;
-
-    // First iteration: Collect scores and total weight
-    for (let section in sections) {
-        sectionScores[section] = 0;
-        let count = 0;
-
-        sections[section].forEach(param => {
-            const value = parseInt(document.getElementById(param).value);
-            if (value) {
-                sectionScores[section] += value;
-                count++;
-            }
-        });
-
-        if (count > 0) {
-            totalWeight += weights[section];
-            sectionScores[section] = sectionScores[section]/ count ;
-        }
-    }
-
-    // Second iteration: Calculate and display weighted scores
-    for (let section in sections) {
-        if (sectionScores[section] > 0) {
-            const weightedScore = sectionScores[section] * weights[section] / totalWeight;
-            totalWeightedScore += weightedScore;
-
-            // Update individual section weighted score
-            document.getElementById(`${section}WeightedScoreDisplay`).textContent = weightedScore.toFixed(2);
-            document.getElementById(`${section}GradeDisplay`).textContent = getGrade(sectionScores[section].toFixed(2));
-        } else {
-            document.getElementById(`${section}WeightedScoreDisplay`).textContent = '0';
-            document.getElementById(`${section}GradeDisplay`).textContent = '';
-        }
-
-        // Update individual section weight
-        document.getElementById(`${section}WeightDisplay`).textContent = weights[section].toFixed(2);
-    }
-
-
-    document.getElementById('gradeOnTop').textContent = getGrade(totalWeightedScore);
-
-    // Update total scores
-    document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
-    document.getElementById('totalGrade').textContent = getGrade(totalWeightedScore);
-    document.getElementById('totalWeightedScore').textContent = totalWeightedScore.toFixed(2);
-    //document.getElementById('totalScore').textContent = finalScore.toFixed(2);
-}
-
-
-// Export functions for use in HTML
-
-window.updateLanguageEvaluation = updateLanguageEvaluation;
-
-window.calculateTotalScore = calculateTotalScore;
-*/
