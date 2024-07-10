@@ -57,7 +57,7 @@ function calculateTotalScore() {
     for (let section in sections) {
         if (sectionScores[section] > 0) {
             const weight = parseFloat(document.getElementById(`${section}Weight`).value);
-            const weightedScore = sectionScores[section] * weight/ totalWeight;
+            const weightedScore = sectionScores[section] * weight / totalWeight;
             totalWeightedScore += weightedScore;
 
             // Update individual section weighted score
@@ -84,6 +84,10 @@ function calculateTotalScore() {
 }
 
 function generateReport() {
+    const projectName = document.getElementById('projectName').value;
+    const componentType = document.getElementById('componentType').value;
+    const programmingLanguage = document.getElementById('programmingLanguage').value;
+
     let reportContent = `
         <html>
         <head>
@@ -98,6 +102,9 @@ function generateReport() {
         </head>
         <body>
             <h1>Project Evaluation Report</h1>
+            <p><strong>Project Name:</strong> ${projectName}</p>
+            <p><strong>Component Type:</strong> ${componentType}</p>
+            <p><strong>Programming Language/Framework:</strong> ${programmingLanguage}</p>
     `;
 
     for (let section in sections) {
@@ -122,8 +129,6 @@ function generateReport() {
     newTab.document.close();
 }
 
-
 // Export functions for use in HTML
 /* exported calculateTotalScore */
 window.calculateTotalScore = calculateTotalScore;
-

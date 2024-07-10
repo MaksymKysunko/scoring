@@ -25,9 +25,34 @@
     </div>
     <div class="container mt-5">
         <h1 class="text-center">Web Application Scoring</h1>
-            <!-- Scoring form -->
-            <form id="scoringForm" class="mt-4">
-            <h3>Component information:</h3>
+        <!-- User Input Section -->
+        <form id="scoringForm" class="mt-4">
+            <h3>Component Information:</h3>
+            <div class="form-group row">
+                <label for="projectName" class="col-sm-4 col-form-label">Project Name:</label>
+                <div class="col-sm-8">
+                    <input type="text" id="projectName" name="projectName" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="componentType" class="col-sm-4 col-form-label">Component Type:</label>
+                <div class="col-sm-8">
+                    <select id="componentType" name="componentType" class="form-control">
+                        <option value="monolith">Monolith</option>
+                        <option value="frontend">Frontend</option>
+                        <option value="backend">Backend</option>
+                        <option value="batchjob">Batch Job</option>
+                        <option value="database">Database</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="programmingLanguage" class="col-sm-4 col-form-label">Programming Language/Framework:</label>
+                <div class="col-sm-8">
+                    <input type="text" id="programmingLanguage" name="programmingLanguage" class="form-control">
+                </div>
+            </div>
+            
             <!-- Codebase evaluation section -->
             <h3>Codebase evaluation:</h3>
             <div class="form-group row">
@@ -208,7 +233,7 @@
                 </select>
             </div>
  
-             <!-- Deploymemnt automationm -->
+             <!-- Deployment automation -->
              <h3>Deployment Automation:</h3>
              <div class="form-group row">
                  <label for="deploymentWeight" class="col-sm-4 col-form-label">Weight:</label>
@@ -235,18 +260,6 @@
                 <label for="languageFrameworkWeight" class="col-sm-4 col-form-label">Weight:</label>
                 <div class="col-sm-8">
                     <input type="number" id="languageFrameworkWeight" name="languageFrameworkWeight" class="form-control" value="0.20" onchange="calculateTotalScore()">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="language" class="col-sm-4 col-form-label">Programming Language:</label>
-                <div class="col-sm-8">
-                    <select id="language" name="language" class="form-control" onchange="updateLanguageEvaluation()">
-                        <option value="0">Select</option>
-                        <option value="Python">Python</option>
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="Java">Java</option>
-                        <!-- Add other languages as needed -->
-                    </select>
                 </div>
             </div>
             <div class="form-group row">
