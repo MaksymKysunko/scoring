@@ -24,17 +24,17 @@
         <h3>Project Grade: <span id="gradeOnTop"> ? </span></h3>
     </div>
     <div class="container mt-5">
-        <h1 class="text-center">Web Application Scoring</h1>
+        <h1 class="text-center mb-5">Web Application Scoring</h1>
         <!-- User Input Section -->
-        <form id="scoringForm" class="mt-4">
-            <h3>Component Information:</h3>
-            <div class="form-group row">
+        <form id="scoringForm">
+            <h3 class="mb-4">Component Information:</h3>
+            <div class="form-group row mb-3">
                 <label for="projectName" class="col-sm-4 col-form-label">Project Name:</label>
                 <div class="col-sm-8">
                     <input type="text" id="projectName" name="projectName" class="form-control">
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label for="componentType" class="col-sm-4 col-form-label">Component Type:</label>
                 <div class="col-sm-8">
                     <select id="componentType" name="componentType" class="form-control">
@@ -46,7 +46,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row mb-4">
                 <label for="programmingLanguage" class="col-sm-4 col-form-label">Programming Language/Framework:</label>
                 <div class="col-sm-8">
                     <input type="text" id="programmingLanguage" name="programmingLanguage" class="form-control">
@@ -54,14 +54,14 @@
             </div>
             
             <!-- Codebase evaluation section -->
-            <h3>Codebase evaluation:</h3>
-            <div class="form-group row">
+            <h3 class="mb-4">Codebase Evaluation:</h3>
+            <div class="form-group row mb-3">
                 <label for="codeQualityWeight" class="col-sm-4 col-form-label">Weight:</label>
                 <div class="col-sm-8">
                     <input type="number" id="codeQualityWeight" name="codeQualityWeight" class="form-control" onchange="window.calculateTotalScore()">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="securityScore">
                     <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#security" target="_blank">
                         Security
@@ -76,7 +76,7 @@
                     <option value="5">A = 0 Vulnerabilities</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="reliability">
                     <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#reliability" target="_blank">
                         Reliability
@@ -92,10 +92,10 @@
                 </select>
             </div>
             <!-- Code Readability and Maintainability -->
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="MaintanabilityScore">
                     <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#maintainability" target="_blank">
-                        Maintanability
+                        Maintainability
                     </a>
                 </label>
                 <select id="MaintanabilityScore" name="MaintanabilityScore" class="form-control" onchange="window.calculateTotalScore()">
@@ -107,7 +107,7 @@
                     <option value="5">A = Technical debt ratio &le; 5%</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="securityHotspotsScore">
                     <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#security-review" target="_blank">
                         Security Hotspots
@@ -122,7 +122,7 @@
                     <option value="5">A = The security review rating &ge; 80%</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="testCoverage">Test Coverage (Unit tests)</label>
                 <select id="testCoverage" name="testCoverage" class="form-control" onchange="window.calculateTotalScore()">
                     <option value="0">Select</option>
@@ -134,10 +134,10 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="commentsDensity">
                     <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#size" target="_blank">
-                        Comments density
+                        Comments Density
                     </a>
                 </label>
                 <select id="commentsDensity" name="commentsDensity" class="form-control" onchange="window.calculateTotalScore()">
@@ -150,15 +150,15 @@
                 </select>
             </div>
             <!-- Version Control Practices -->
-            <h3>Version Control:</h3>
-            <div class="form-group row">
+            <h3 class="mb-4">Version Control:</h3>
+            <div class="form-group row mb-3">
                 <label for="versionControlWeight" class="col-sm-4 col-form-label">Weight:</label>
                 <div class="col-sm-8">
                     <input type="number" id="versionControlWeight" name="versionControlWeight" class="form-control" onchange="window.calculateTotalScore()">
                 </div>
             </div>
             
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label for="branchingStrategy" class="col-sm-4 col-form-label">Branching Strategy:</label>
                 <div class="col-sm-8">
                     <select id="branchingStrategy" name="branchingStrategy" class="form-control" onchange="window.calculateTotalScore()">
@@ -172,7 +172,7 @@
                 </div>
             </div>
             
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label for="commitMessages" class="col-sm-4 col-form-label">Commit Messages:</label>
                 <div class="col-sm-8">
                     <select id="commitMessages" name="commitMessages" class="form-control" onchange="window.calculateTotalScore()">
@@ -186,7 +186,7 @@
                 </div>
             </div>
             
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label for="pullRequests" class="col-sm-4 col-form-label">Pull Requests and Code Reviews:</label>
                 <div class="col-sm-8">
                     <select id="pullRequests" name="pullRequests" class="form-control" onchange="window.calculateTotalScore()">
@@ -201,14 +201,14 @@
             </div>
             
             <!-- CI Pipeline and Quality Gates -->
-            <h3>CI Pipeline and Quality Gates:</h3>
-            <div class="form-group row">
+            <h3 class="mb-4">CI Pipeline and Quality Gates:</h3>
+            <div class="form-group row mb-3">
                 <label for="buildCIWeight" class="col-sm-4 col-form-label">Weight:</label>
                 <div class="col-sm-8">
                     <input type="number" id="buildCIWeight" name="buildCIWeight" class="form-control" onchange="window.calculateTotalScore()">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="ciPipeline">CI Pipeline and Quality Gates:</label>
                 <select id="ciPipeline" name="ciPipeline" class="form-control" onchange="window.calculateTotalScore()">
                     <option value="0">Select</option>
@@ -221,7 +221,7 @@
             </div>
 
             <!-- Build State -->
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="buildState">Build State:</label>
                 <select id="buildState" name="buildState" class="form-control" onchange="window.calculateTotalScore()">
                     <option value="0">Select</option>
@@ -233,16 +233,16 @@
                 </select>
             </div>
  
-             <!-- Deployment automation -->
-             <h3>Deployment Automation:</h3>
-             <div class="form-group row">
+             <!-- Deployment Automation -->
+             <h3 class="mb-4">Deployment Automation:</h3>
+             <div class="form-group row mb-3">
                  <label for="deploymentWeight" class="col-sm-4 col-form-label">Weight:</label>
                  <div class="col-sm-8">
                      <input type="number" id="deploymentWeight" name="deploymentWeight" class="form-control" onchange="window.calculateTotalScore()">
                  </div>
              </div>
             <!-- Deployment Evaluation -->
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="deploymentScore">Deployment Evaluation</label>
                 <select id="deploymentScore" name="deploymentScore" class="form-control" onchange="calculateTotalScore()">
                     <option value="0">Select</option>
@@ -255,14 +255,14 @@
             </div>
 
             <!-- Programming Language and Framework Evaluation -->
-            <h3>Programming Language Evaluation</h3>
-            <div class="form-group row">
+            <h3 class="mb-4">Programming Language Evaluation</h3>
+            <div class="form-group row mb-3">
                 <label for="languageFrameworkWeight" class="col-sm-4 col-form-label">Weight:</label>
                 <div class="col-sm-8">
                     <input type="number" id="languageFrameworkWeight" name="languageFrameworkWeight" class="form-control" value="0.20" onchange="calculateTotalScore()">
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label for="popularity" class="col-sm-4 col-form-label">Popularity:</label>
                 <div class="col-sm-8">
                     <select id="popularity" name="popularity" class="form-control" onchange="calculateTotalScore()">
@@ -276,7 +276,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label for="support" class="col-sm-4 col-form-label">Support:</label>
                 <div class="col-sm-8">
                     <select id="support" name="support" class="form-control" onchange="calculateTotalScore()">
@@ -289,7 +289,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label for="performance" class="col-sm-4 col-form-label">Performance:</label>
                 <div class="col-sm-8">
                     <select id="performance" name="performance" class="form-control" onchange="calculateTotalScore()">
@@ -302,7 +302,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label for="easeOfUse" class="col-sm-4 col-form-label">Ease of Use:</label>
                 <div class="col-sm-8">
                     <select id="easeOfUse" name="easeOfUse" class="form-control" onchange="calculateTotalScore()">
@@ -317,8 +317,8 @@
             </div>
 
          <!-- Summary Table -->
-         <h3>Summary Table</h3>
-         <table class="table table-bordered">
+         <h3 class="mb-4">Summary Table</h3>
+         <table class="table table-bordered mb-5">
              <thead>
                  <tr>
                      <th>Criteria</th>
@@ -366,7 +366,7 @@
                  </tr>
              </tbody>
          </table>
-        <div class="form-group">
+        <div class="form-group text-center">
             <button type="button" class="btn btn-primary" onclick="generateReport()">Generate Report</button>
         </div>
 
