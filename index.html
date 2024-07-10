@@ -27,6 +27,7 @@
         <h1 class="text-center">Web Application Scoring</h1>
             <!-- Scoring form -->
             <form id="scoringForm" class="mt-4">
+            <h3>Component information:</h3>
             <!-- Codebase evaluation section -->
             <h3>Codebase evaluation:</h3>
             <div class="form-group row">
@@ -36,7 +37,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="security">
+                <label for="securityScore">
                     <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#security" target="_blank">
                         Security
                     </a>
@@ -67,7 +68,7 @@
             </div>
             <!-- Code Readability and Maintainability -->
             <div class="form-group">
-                <label for="Maintanability">
+                <label for="MaintanabilityScore">
                     <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#maintainability" target="_blank">
                         Maintanability
                     </a>
@@ -82,7 +83,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="securityHotspots">
+                <label for="securityHotspotsScore">
                     <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#security-review" target="_blank">
                         Security Hotspots
                     </a>
@@ -352,6 +353,10 @@
                  </tr>
              </tbody>
          </table>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+        </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
