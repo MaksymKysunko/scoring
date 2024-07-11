@@ -137,6 +137,15 @@ function generateReport() {
     newTab.document.close();
 }
 
+// Function to clear form data
+function clearForm() {
+    document.querySelectorAll('#scoringForm input, #scoringForm select').forEach(input => {
+        input.value = '';
+    });
+    localStorage.removeItem('scoringFormData');
+    calculateTotalScore();
+}
+
 // Function to save form data to localStorage
 function saveFormData() {
     const formData = {};
