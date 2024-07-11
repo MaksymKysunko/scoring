@@ -16,8 +16,16 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById(`${section}WeightDisplay`).textContent = calculatedWeight;
     });
 
+    // Load form data from localStorage
+    loadFormData();
+
     // Set default values for summary table weights
     calculateTotalScore();
+
+    // Add event listeners to save data on input change
+    document.querySelectorAll('#scoringForm input, #scoringForm select').forEach(input => {
+        input.addEventListener('change', saveFormData);
+    });
 });
 
 function getGrade(score) {
