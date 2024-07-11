@@ -54,268 +54,295 @@
             </div>
             
             <!-- Codebase evaluation section -->
-            <h3 class="mb-4">Codebase Evaluation:</h3>
-            <div class="form-group row mb-3">
-                <label for="codeQualityWeight" class="col-sm-4 col-form-label">Weight:</label>
-                <div class="col-sm-8">
-                    <input type="number" id="codeQualityWeight" name="codeQualityWeight" class="form-control" onchange="window.calculateTotalScore()">
+            <h3 class="mb-4">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#codebaseEvaluation" aria-expanded="true" aria-controls="codebaseEvaluation">
+                    Codebase Evaluation
+                </button>
+            </h3>
+            <div id="codebaseEvaluation" class="collapse show">
+                <div class="form-group row mb-3">
+                    <label for="codeQualityWeight" class="col-sm-4 col-form-label">Weight:</label>
+                    <div class="col-sm-8">
+                        <input type="number" id="codeQualityWeight" name="codeQualityWeight" class="form-control" onchange="window.calculateTotalScore()">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3">
-                <label for="securityScore">
-                    <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#security" target="_blank">
-                        Security
-                    </a>
-                </label>
-                <select id="securityScore" name="securityScore" class="form-control" onchange="window.calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">E = at least 1 Blocker Vulnerability</option>
-                    <option value="2">D = at least 1 Critical Vulnerability</option>
-                    <option value="3">C = at least 1 Major Vulnerability</option>
-                    <option value="4">B = at least 1 Minor Vulnerability</option>
-                    <option value="5">A = 0 Vulnerabilities</option>
-                </select>
-            </div>
-            <div class="form-group mb-3">
-                <label for="reliability">
-                    <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#reliability" target="_blank">
-                        Reliability
-                    </a>
-                </label>
-                <select id="reliabilityScore" name="reliabilityScore" class="form-control" onchange="window.calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">E = at least 1 Blocker Bug</option>
-                    <option value="2">D = at least 1 Critical Bug</option>
-                    <option value="3">C = at least 1 Major Bug</option>
-                    <option value="4">B = at least 1 Minor Bug</option>
-                    <option value="5">A = 0 Bugs</option>
-                </select>
-            </div>
-            <!-- Code Readability and Maintainability -->
-            <div class="form-group mb-3">
-                <label for="MaintanabilityScore">
-                    <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#maintainability" target="_blank">
-                        Maintainability
-                    </a>
-                </label>
-                <select id="MaintanabilityScore" name="MaintanabilityScore" class="form-control" onchange="window.calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">E = Technical debt ratio &gt; 50%</option>
-                    <option value="2">D = Technical debt ratio between 21 to 50%</option>
-                    <option value="3">C = Technical debt ratio between 11 to 20%</option>
-                    <option value="4">B = Technical debt ratio between 6 to 10%</option>
-                    <option value="5">A = Technical debt ratio &le; 5%</option>
-                </select>
-            </div>
-            <div class="form-group mb-3">
-                <label for="securityHotspotsScore">
-                    <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#security-review" target="_blank">
-                        Security Hotspots
-                    </a>
-                </label>
-                <select id="securityHotspotsScore" name="securityHotspotsScore" class="form-control" onchange="window.calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">E = The security review rating &lt; 30%</option>
-                    <option value="2">D = The security review rating between 30% to 49%</option>
-                    <option value="3">C = The security review rating between 50% to 69%</option>
-                    <option value="4">B = The security review rating between 70% to 79%</option>
-                    <option value="5">A = The security review rating &ge; 80%</option>
-                </select>
-            </div>
-            <div class="form-group mb-3">
-                <label for="testCoverage">Test Coverage (Unit tests)</label>
-                <select id="testCoverage" name="testCoverage" class="form-control" onchange="window.calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">E = &lt; 20% coverage</option>
-                    <option value="2">D = 20-40% coverage</option>
-                    <option value="3">C = 40-60% coverage</option>
-                    <option value="4">B = 60-80% coverage</option>
-                    <option value="5">A = &gt; 80% coverage</option>
-                </select>
-            </div>
+                <div class="form-group mb-3">
+                    <label for="securityScore">
+                        <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#security" target="_blank">
+                            Security
+                        </a>
+                    </label>
+                    <select id="securityScore" name="securityScore" class="form-control" onchange="window.calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">E = at least 1 Blocker Vulnerability</option>
+                        <option value="2">D = at least 1 Critical Vulnerability</option>
+                        <option value="3">C = at least 1 Major Vulnerability</option>
+                        <option value="4">B = at least 1 Minor Vulnerability</option>
+                        <option value="5">A = 0 Vulnerabilities</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="reliability">
+                        <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#reliability" target="_blank">
+                            Reliability
+                        </a>
+                    </label>
+                    <select id="reliabilityScore" name="reliabilityScore" class="form-control" onchange="window.calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">E = at least 1 Blocker Bug</option>
+                        <option value="2">D = at least 1 Critical Bug</option>
+                        <option value="3">C = at least 1 Major Bug</option>
+                        <option value="4">B = at least 1 Minor Bug</option>
+                        <option value="5">A = 0 Bugs</option>
+                    </select>
+                </div>
+                <!-- Code Readability and Maintainability -->
+                <div class="form-group mb-3">
+                    <label for="MaintanabilityScore">
+                        <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#maintainability" target="_blank">
+                            Maintainability
+                        </a>
+                    </label>
+                    <select id="MaintanabilityScore" name="MaintanabilityScore" class="form-control" onchange="window.calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">E = Technical debt ratio &gt; 50%</option>
+                        <option value="2">D = Technical debt ratio between 21 to 50%</option>
+                        <option value="3">C = Technical debt ratio between 11 to 20%</option>
+                        <option value="4">B = Technical debt ratio between 6 to 10%</option>
+                        <option value="5">A = Technical debt ratio &le; 5%</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="securityHotspotsScore">
+                        <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#security-review" target="_blank">
+                            Security Hotspots
+                        </a>
+                    </label>
+                    <select id="securityHotspotsScore" name="securityHotspotsScore" class="form-control" onchange="window.calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">E = The security review rating &lt; 30%</option>
+                        <option value="2">D = The security review rating between 30% to 49%</option>
+                        <option value="3">C = The security review rating between 50% to 69%</option>
+                        <option value="4">B = The security review rating between 70% to 79%</option>
+                        <option value="5">A = The security review rating &ge; 80%</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="testCoverage">Test Coverage (Unit tests)</label>
+                    <select id="testCoverage" name="testCoverage" class="form-control" onchange="window.calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">E = &lt; 20% coverage</option>
+                        <option value="2">D = 20-40% coverage</option>
+                        <option value="3">C = 40-60% coverage</option>
+                        <option value="4">B = 60-80% coverage</option>
+                        <option value="5">A = &gt; 80% coverage</option>
+                    </select>
+                </div>
 
-            <div class="form-group mb-3">
-                <label for="commentsDensity">
-                    <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#size" target="_blank">
-                        Comments Density
-                    </a>
-                </label>
-                <select id="commentsDensity" name="commentsDensity" class="form-control" onchange="window.calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">E = &lt; 10% comments density</option>
-                    <option value="2">D = 10-20% comments density</option>
-                    <option value="3">C = 20-30% comments density</option>
-                    <option value="4">B = 30-40% comments density</option>
-                    <option value="5">A = &gt; 40% comments density</option>
-                </select>
+                <div class="form-group mb-3">
+                    <label for="commentsDensity">
+                        <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#size" target="_blank">
+                            Comments Density
+                        </a>
+                    </label>
+                    <select id="commentsDensity" name="commentsDensity" class="form-control" onchange="window.calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">E = &lt; 10% comments density</option>
+                        <option value="2">D = 10-20% comments density</option>
+                        <option value="3">C = 20-30% comments density</option>
+                        <option value="4">B = 30-40% comments density</option>
+                        <option value="5">A = &gt; 40% comments density</option>
+                    </select>
+                </div>
             </div>
             <!-- Version Control Practices -->
-            <h3 class="mb-4">Version Control:</h3>
-            <div class="form-group row mb-3">
-                <label for="versionControlWeight" class="col-sm-4 col-form-label">Weight:</label>
-                <div class="col-sm-8">
-                    <input type="number" id="versionControlWeight" name="versionControlWeight" class="form-control" onchange="window.calculateTotalScore()">
+            <h3 class="mb-4">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#versionControl" aria-expanded="true" aria-controls="versionControl">
+                    Version Control
+                </button>
+            </h3>
+            <div id="versionControl" class="collapse show">
+                <div class="form-group row mb-3">
+                    <label for="versionControlWeight" class="col-sm-4 col-form-label">Weight:</label>
+                    <div class="col-sm-8">
+                        <input type="number" id="versionControlWeight" name="versionControlWeight" class="form-control" onchange="window.calculateTotalScore()">
+                    </div>
                 </div>
-            </div>
-            
-            <div class="form-group row mb-3">
-                <label for="branchingStrategy" class="col-sm-4 col-form-label">Branching Strategy:</label>
-                <div class="col-sm-8">
-                    <select id="branchingStrategy" name="branchingStrategy" class="form-control" onchange="window.calculateTotalScore()">
-                        <option value="0">Select</option>
-                        <option value="1">E = No branches (all work on main)</option>
-                        <option value="2">D = Ad hoc branching</option>
-                        <option value="3">C = Defined branching strategy (e.g., GitFlow)</option>
-                        <option value="4">B = Well-defined branching strategy with some cleanup</option>
-                        <option value="5">A = Strict and enforced branching strategy with regular cleanup</option>
-                    </select>
+                
+                <div class="form-group row mb-3">
+                    <label for="branchingStrategy" class="col-sm-4 col-form-label">Branching Strategy:</label>
+                    <div class="col-sm-8">
+                        <select id="branchingStrategy" name="branchingStrategy" class="form-control" onchange="window.calculateTotalScore()">
+                            <option value="0">Select</option>
+                            <option value="1">E = No branches (all work on main)</option>
+                            <option value="2">D = Ad hoc branching</option>
+                            <option value="3">C = Defined branching strategy (e.g., GitFlow)</option>
+                            <option value="4">B = Well-defined branching strategy with some cleanup</option>
+                            <option value="5">A = Strict and enforced branching strategy with regular cleanup</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="form-group row mb-3">
-                <label for="commitMessages" class="col-sm-4 col-form-label">Commit Messages:</label>
-                <div class="col-sm-8">
-                    <select id="commitMessages" name="commitMessages" class="form-control" onchange="window.calculateTotalScore()">
-                        <option value="0">Select</option>
-                        <option value="1">E = No commit messages or meaningless</option>
-                        <option value="2">D = Inconsistent commit messages</option>
-                        <option value="3">C = Meaningful commit messages</option>
-                        <option value="4">B = Standardized, meaningful commit messages</option>
-                        <option value="5">A = Standardized, meaningful commit messages with templates</option>
-                    </select>
+                
+                <div class="form-group row mb-3">
+                    <label for="commitMessages" class="col-sm-4 col-form-label">Commit Messages:</label>
+                    <div class="col-sm-8">
+                        <select id="commitMessages" name="commitMessages" class="form-control" onchange="window.calculateTotalScore()">
+                            <option value="0">Select</option>
+                            <option value="1">E = No commit messages or meaningless</option>
+                            <option value="2">D = Inconsistent commit messages</option>
+                            <option value="3">C = Meaningful commit messages</option>
+                            <option value="4">B = Standardized, meaningful commit messages</option>
+                            <option value="5">A = Standardized, meaningful commit messages with templates</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="form-group row mb-3">
-                <label for="pullRequests" class="col-sm-4 col-form-label">Pull Requests and Code Reviews:</label>
-                <div class="col-sm-8">
-                    <select id="pullRequests" name="pullRequests" class="form-control" onchange="window.calculateTotalScore()">
-                        <option value="0">Select</option>
-                        <option value="1">E = No pull requests or code reviews</option>
-                        <option value="2">D = Occasional pull requests and code reviews</option>
-                        <option value="3">C = Regular pull requests and code reviews</option>
-                        <option value="4">B = Mandatory pull requests and thorough code reviews</option>
-                        <option value="5">A = Mandatory pull requests and thorough code reviews for all changes</option>
-                    </select>
+                
+                <div class="form-group row mb-3">
+                    <label for="pullRequests" class="col-sm-4 col-form-label">Pull Requests and Code Reviews:</label>
+                    <div class="col-sm-8">
+                        <select id="pullRequests" name="pullRequests" class="form-control" onchange="window.calculateTotalScore()">
+                            <option value="0">Select</option>
+                            <option value="1">E = No pull requests or code reviews</option>
+                            <option value="2">D = Occasional pull requests and code reviews</option>
+                            <option value="3">C = Regular pull requests and code reviews</option>
+                            <option value="4">B = Mandatory pull requests and thorough code reviews</option>
+                            <option value="5">A = Mandatory pull requests and thorough code reviews for all changes</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             
             <!-- CI Pipeline and Quality Gates -->
-            <h3 class="mb-4">CI Pipeline and Quality Gates:</h3>
-            <div class="form-group row mb-3">
-                <label for="buildCIWeight" class="col-sm-4 col-form-label">Weight:</label>
-                <div class="col-sm-8">
-                    <input type="number" id="buildCIWeight" name="buildCIWeight" class="form-control" onchange="window.calculateTotalScore()">
+            <h3 class="mb-4">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ciPipeline" aria-expanded="true" aria-controls="ciPipeline">
+                    CI Pipeline and Quality Gates
+                </button>
+            </h3>
+            <div id="ciPipeline" class="collapse show">
+                <div class="form-group row mb-3">
+                    <label for="buildCIWeight" class="col-sm-4 col-form-label">Weight:</label>
+                    <div class="col-sm-8">
+                        <input type="number" id="buildCIWeight" name="buildCIWeight" class="form-control" onchange="window.calculateTotalScore()">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="ciPipeline">CI Pipeline and Quality Gates:</label>
+                    <select id="ciPipeline" name="ciPipeline" class="form-control" onchange="window.calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">E = No CI pipeline</option>
+                        <option value="2">D = CI pipeline configured but manual execution</option>
+                        <option value="3">C = CI pipeline with automatic builds and automated tests</option>
+                        <option value="4">B = CI pipeline with quality gates</option>
+                        <option value="5">A = CI pipeline with advanced reporting and notifications</option>
+                    </select>
+                </div>
+
+                <!-- Build State -->
+                <div class="form-group mb-3">
+                    <label for="buildState">Build State:</label>
+                    <select id="buildState" name="buildState" class="form-control" onchange="window.calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">E = CI does not exist</option>
+                        <option value="2">D = CI configured but build fails because of missing dependencies</option>
+                        <option value="3">C = CI exists but build fails because of incompatible dependencies</option>
+                        <option value="4">B = Build succeeds but with warnings or minor issues</option>
+                        <option value="5">A = Build succeeds without issues</option>
+                    </select>
                 </div>
             </div>
-            <div class="form-group mb-3">
-                <label for="ciPipeline">CI Pipeline and Quality Gates:</label>
-                <select id="ciPipeline" name="ciPipeline" class="form-control" onchange="window.calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">E = No CI pipeline</option>
-                    <option value="2">D = CI pipeline configured but manual execution</option>
-                    <option value="3">C = CI pipeline with automatic builds and automated tests</option>
-                    <option value="4">B = CI pipeline with quality gates</option>
-                    <option value="5">A = CI pipeline with advanced reporting and notifications</option>
-                </select>
-            </div>
-
-            <!-- Build State -->
-            <div class="form-group mb-3">
-                <label for="buildState">Build State:</label>
-                <select id="buildState" name="buildState" class="form-control" onchange="window.calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">E = CI does not exist</option>
-                    <option value="2">D = CI configured but build fails because of missing dependencies</option>
-                    <option value="3">C = CI exists but build fails because of incompatible dependencies</option>
-                    <option value="4">B = Build succeeds but with warnings or minor issues</option>
-                    <option value="5">A = Build succeeds without issues</option>
-                </select>
-            </div>
- 
              <!-- Deployment Automation -->
-             <h3 class="mb-4">Deployment Automation:</h3>
-             <div class="form-group row mb-3">
-                 <label for="deploymentWeight" class="col-sm-4 col-form-label">Weight:</label>
-                 <div class="col-sm-8">
-                     <input type="number" id="deploymentWeight" name="deploymentWeight" class="form-control" onchange="window.calculateTotalScore()">
-                 </div>
-             </div>
-            <!-- Deployment Evaluation -->
-            <div class="form-group mb-3">
-                <label for="deploymentScore">Deployment Evaluation</label>
-                <select id="deploymentScore" name="deploymentScore" class="form-control" onchange="calculateTotalScore()">
-                    <option value="0">Select</option>
-                    <option value="1">E = Manual deployment with production stop</option>
-                    <option value="2">D = Manual deployment with staging environment</option>
-                    <option value="3">C = Automated pipeline without health checks</option>
-                    <option value="4">B = Automated pipeline with basic health checks</option>
-                    <option value="5">A = Full pipeline with QA, canary deployments, and rollback capabilities</option>
-                </select>
+             <h3 class="mb-4">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#deploymentAutomation" aria-expanded="true" aria-controls="deploymentAutomation">
+                    Deployment Automation
+                </button>
+            </h3>
+            <div id="deploymentAutomation" class="collapse show">
+                <div class="form-group row mb-3">
+                    <label for="deploymentWeight" class="col-sm-4 col-form-label">Weight:</label>
+                    <div class="col-sm-8">
+                        <input type="number" id="deploymentWeight" name="deploymentWeight" class="form-control" onchange="window.calculateTotalScore()">
+                    </div>
+                </div>
+                <!-- Deployment Evaluation -->
+                <div class="form-group mb-3">
+                    <label for="deploymentScore">Deployment Evaluation</label>
+                    <select id="deploymentScore" name="deploymentScore" class="form-control" onchange="calculateTotalScore()">
+                        <option value="0">Select</option>
+                        <option value="1">E = Manual deployment with production stop</option>
+                        <option value="2">D = Manual deployment with staging environment</option>
+                        <option value="3">C = Automated pipeline without health checks</option>
+                        <option value="4">B = Automated pipeline with basic health checks</option>
+                        <option value="5">A = Full pipeline with QA, canary deployments, and rollback capabilities</option>
+                    </select>
+                </div>
             </div>
-
             <!-- Programming Language and Framework Evaluation -->
-            <h3 class="mb-4">Programming Language Evaluation</h3>
-            <div class="form-group row mb-3">
-                <label for="languageFrameworkWeight" class="col-sm-4 col-form-label">Weight:</label>
-                <div class="col-sm-8">
-                    <input type="number" id="languageFrameworkWeight" name="languageFrameworkWeight" class="form-control" value="0.20" onchange="calculateTotalScore()">
+            <h3 class="mb-4">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#programmingLanguage" aria-expanded="true" aria-controls="programmingLanguage">
+                    Programming Language Evaluation
+                </button>
+            </h3>
+            <div id="programmingLanguage" class="collapse show">
+                <div class="form-group row mb-3">
+                    <label for="languageFrameworkWeight" class="col-sm-4 col-form-label">Weight:</label>
+                    <div class="col-sm-8">
+                        <input type="number" id="languageFrameworkWeight" name="languageFrameworkWeight" class="form-control" value="0.20" onchange="calculateTotalScore()">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row mb-3">
-                <label for="popularity" class="col-sm-4 col-form-label">Popularity:</label>
-                <div class="col-sm-8">
-                    <select id="popularity" name="popularity" class="form-control" onchange="calculateTotalScore()">
-                        <option value="0">Select</option>
-                        <option value="1">E - Almost never used with an inactive or non-existent community</option>
-                        <option value="2">D - Rarely used with a minimal community</option>
-                        <option value="3">C - Somewhat popular with a smaller community</option>
-                        <option value="4">B - Moderately popular with a reasonably active community</option>
-                        <option value="5">A - Widely used with a large and active community</option>
+                <div class="form-group row mb-3">
+                    <label for="popularity" class="col-sm-4 col-form-label">Popularity:</label>
+                    <div class="col-sm-8">
+                        <select id="popularity" name="popularity" class="form-control" onchange="calculateTotalScore()">
+                            <option value="0">Select</option>
+                            <option value="1">E - Almost never used with an inactive or non-existent community</option>
+                            <option value="2">D - Rarely used with a minimal community</option>
+                            <option value="3">C - Somewhat popular with a smaller community</option>
+                            <option value="4">B - Moderately popular with a reasonably active community</option>
+                            <option value="5">A - Widely used with a large and active community</option>
 
-                    </select>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="support" class="col-sm-4 col-form-label">Support:</label>
+                    <div class="col-sm-8">
+                        <select id="support" name="support" class="form-control" onchange="calculateTotalScore()">
+                            <option value="0">Select</option>
+                            <option value="1">E - Poor support and negligible community activity</option>
+                            <option value="2">D - Limited support and minimal community activity</option>
+                            <option value="3">C - Adequate support with some community activity</option>
+                            <option value="4">B - Good official support and active community support channels</option>
+                            <option value="5">A - Excellent official support and active community support channels</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="performance" class="col-sm-4 col-form-label">Performance:</label>
+                    <div class="col-sm-8">
+                        <select id="performance" name="performance" class="form-control" onchange="calculateTotalScore()">
+                            <option value="0">Select</option>
+                            <option value="1">E - Poor performance, generally not recommended for performance-critical applications</option>
+                            <option value="2">D - Below-average performance, may have significant inefficiencies</option>
+                            <option value="3">C - Average performance, suitable for most tasks</option>
+                            <option value="4">B - Generally good performance with minor inefficiencies</option>
+                            <option value="5">A - Known for excellent performance and efficiency</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="easeOfUse" class="col-sm-4 col-form-label">Ease of Use:</label>
+                    <div class="col-sm-8">
+                        <select id="easeOfUse" name="easeOfUse" class="form-control" onchange="calculateTotalScore()">
+                            <option value="0">Select</option>
+                            <option value="1">E - Very difficult to learn and use, even for experienced developers</option>
+                            <option value="2">D - Steep learning curve, may be challenging for beginners</option>
+                            <option value="3">C - Average learning curve, suitable for developers with some experience</option>
+                            <option value="4">B - Moderately easy to learn, with some complexities</option>
+                            <option value="5">A - Easy to learn and use, even for beginners</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="form-group row mb-3">
-                <label for="support" class="col-sm-4 col-form-label">Support:</label>
-                <div class="col-sm-8">
-                    <select id="support" name="support" class="form-control" onchange="calculateTotalScore()">
-                        <option value="0">Select</option>
-                        <option value="1">E - Poor support and negligible community activity</option>
-                        <option value="2">D - Limited support and minimal community activity</option>
-                        <option value="3">C - Adequate support with some community activity</option>
-                        <option value="4">B - Good official support and active community support channels</option>
-                        <option value="5">A - Excellent official support and active community support channels</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row mb-3">
-                <label for="performance" class="col-sm-4 col-form-label">Performance:</label>
-                <div class="col-sm-8">
-                    <select id="performance" name="performance" class="form-control" onchange="calculateTotalScore()">
-                        <option value="0">Select</option>
-                        <option value="1">E - Poor performance, generally not recommended for performance-critical applications</option>
-                        <option value="2">D - Below-average performance, may have significant inefficiencies</option>
-                        <option value="3">C - Average performance, suitable for most tasks</option>
-                        <option value="4">B - Generally good performance with minor inefficiencies</option>
-                        <option value="5">A - Known for excellent performance and efficiency</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row mb-3">
-                <label for="easeOfUse" class="col-sm-4 col-form-label">Ease of Use:</label>
-                <div class="col-sm-8">
-                    <select id="easeOfUse" name="easeOfUse" class="form-control" onchange="calculateTotalScore()">
-                        <option value="0">Select</option>
-                        <option value="1">E - Very difficult to learn and use, even for experienced developers</option>
-                        <option value="2">D - Steep learning curve, may be challenging for beginners</option>
-                        <option value="3">C - Average learning curve, suitable for developers with some experience</option>
-                        <option value="4">B - Moderately easy to learn, with some complexities</option>
-                        <option value="5">A - Easy to learn and use, even for beginners</option>
-                    </select>
-                </div>
-            </div>
-
          <!-- Summary Table -->
          <h3 class="mb-4">Summary Table</h3>
          <table class="table table-bordered mb-5">

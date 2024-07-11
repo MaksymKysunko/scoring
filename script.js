@@ -129,6 +129,32 @@ function generateReport() {
     newTab.document.close();
 }
 
+// Function to save form data to localStorage
+function saveFormData() {
+    const formData = {};
+    document.querySelectorAll('#scoringForm input, #scoringForm select').forEach(input => {
+        formData[input.id] = input.value;
+    });
+    localStorage.setItem('scoringFormData', JSON.stringify(formData));
+}
+
+// Function to load form data from localStorage
+function loadFormData() {
+    const savedFormData = localStorage.getItem('scoringFormData');
+    if (savedFormData) {
+        const formData = JSON.parse(savedFormData);
+        for (const key in formData) {
+            if (formData.hasOwnProperty(key)) {
+                const input = document.getElementById(key);
+                if (input) {
+                    input.value = formData[key];
+                }
+            }
+        }
+        calculateTotalScore();
+    }
+}
+
 // Export functions for use in HTML
 /* exported calculateTotalScore */
 window.calculateTotalScore = calculateTotalScore;
