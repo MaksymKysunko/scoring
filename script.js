@@ -202,7 +202,7 @@ function generateReport() {
 // Function to clear form data
 function clearForm() {
     document.querySelectorAll('#scoringForm input, #scoringForm select').forEach(input => {
-        if (!input.name.includes('weight') && !input.id.includes('weight')) {
+        if (!input.name.includes('Weight') && !input.id.includes('Weight')) {
             input.value = '';
         }
     });
