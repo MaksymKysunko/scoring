@@ -88,7 +88,7 @@
                     </select>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="reliability">
+                    <label for="reliabilityScore">
                         <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#reliability" target="_blank">
                             Reliability
                         </a>
@@ -104,12 +104,12 @@
                 </div>
                 <!-- Code Readability and Maintainability -->
                 <div class="form-group mb-3">
-                    <label for="MaintanabilityScore">
+                    <label for="maintanabilityScore">
                         <a href="https://docs.sonarsource.com/sonarqube/latest/user-guide/code-metrics/metrics-definition/#maintainability" target="_blank">
                             Maintainability
                         </a>
                     </label>
-                    <select id="MaintanabilityScore" name="MaintanabilityScore" class="form-control" onchange="window.calculateTotalScore()">
+                    <select id="maintanabilityScore" name="maintanabilityScore" class="form-control" onchange="window.calculateTotalScore()">
                         <option value="0">Select</option>
                         <option value="1">E = Technical debt ratio &gt; 50%</option>
                         <option value="2">D = Technical debt ratio between 21 to 50%</option>
@@ -203,19 +203,6 @@
                     </div>
                 </div>
                 
-                <div class="form-group row mb-3">
-                    <label for="pullRequests" class="col-sm-4 col-form-label">Pull Requests and Code Reviews:</label>
-                    <div class="col-sm-8">
-                        <select id="pullRequests" name="pullRequests" class="form-control" onchange="window.calculateTotalScore()">
-                            <option value="0">Select</option>
-                            <option value="1">E = No pull requests or code reviews</option>
-                            <option value="2">D = Occasional pull requests and code reviews</option>
-                            <option value="3">C = Regular pull requests and code reviews</option>
-                            <option value="4">B = Mandatory pull requests and thorough code reviews</option>
-                            <option value="5">A = Mandatory pull requests and thorough code reviews for all changes</option>
-                        </select>
-                    </div>
-                </div>
             </div>
             
             <!-- CI Pipeline and Quality Gates -->
@@ -319,19 +306,6 @@
                             <option value="3">C - Adequate support with some community activity</option>
                             <option value="4">B - Good official support and active community support channels</option>
                             <option value="5">A - Excellent official support and active community support channels</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row mb-3">
-                    <label for="performance" class="col-sm-4 col-form-label">Performance:</label>
-                    <div class="col-sm-8">
-                        <select id="performance" name="performance" class="form-control" onchange="calculateTotalScore()">
-                            <option value="0">Select</option>
-                            <option value="1">E - Poor performance, generally not recommended for performance-critical applications</option>
-                            <option value="2">D - Below-average performance, may have significant inefficiencies</option>
-                            <option value="3">C - Average performance, suitable for most tasks</option>
-                            <option value="4">B - Generally good performance with minor inefficiencies</option>
-                            <option value="5">A - Known for excellent performance and efficiency</option>
                         </select>
                     </div>
                 </div>

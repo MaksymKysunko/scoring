@@ -1,9 +1,9 @@
 const sections = {
-    codeQuality: ["securityScore", "reliabilityScore", "MaintanabilityScore", "securityHotspotsScore", "testCoverage", "commentsDensity"],
+    codeQuality: ["securityScore", "reliabilityScore", "maintanabilityScore", "securityHotspotsScore", "testCoverage", "commentsDensity"],
     buildCI: ["ciPipeline", "buildState"],
     deployment: ["deploymentScore"],
-    languageFramework: ["popularity", "support", "performance", "easeOfUse"],
-    versionControl: ["branchingStrategy", "commitMessages", "pullRequests"]
+    languageFramework: ["popularity", "support", "easeOfUse"],
+    versionControl: ["branchingStrategy", "commitMessages"]
 };
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -121,7 +121,15 @@ function generateReport() {
         reportContent += `<tr><th>Criteria</th><th>Score</th></tr>`;
         sections[section].forEach(param => {
             const labelElement = document.querySelector(`label[for=${param}]`);
-            const value = getGrade(document.getElementById(param).value);
+            const value = getGrade(document.getElementById(param).value); 
+            /*
+            if (document.getElementById(param).value) 
+                { 
+                    const value = getGrade(document.getElementById(param).value); 
+                }
+            else 
+                { const value = ''; }
+            */
             if (labelElement) {
                 const label = labelElement.innerText;
                 reportContent += `<tr><td>${label}</td><td>${value}</td></tr>`;
@@ -130,7 +138,61 @@ function generateReport() {
         reportContent += `</table>`;
     }
 
+    // Include the total table
+    reportContent += `
+        <h2>Summary Table</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Criteria</th>
+                    <th>Weight</th>
+                    <th>Grade</th>
+                    <th>Weighted Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Code Readability and Maintainability</td>
+                    <td>${document.getElementById('codeQualityWeightDisplay').textContent}</td>
+                    <td>${document.getElementById('codeQualityGradeDisplay').textContent}</td>
+                    <td>${document.getElementById('codeQualityWeightedScoreDisplay').textContent}</td>
+                </tr>
+                <tr>
+                    <td>CI/CD Pipeline</td>
+                    <td>${document.getElementById('buildCIWeightDisplay').textContent}</td>
+                    <td>${document.getElementById('buildCIGradeDisplay').textContent}</td>
+                    <td>${document.getElementById('buildCIWeightedScoreDisplay').textContent}</td>
+                </tr>
+                <tr>
+                    <td>Version Control</td>
+                    <td>${document.getElementById('versionControlWeightDisplay').textContent}</td>
+                    <td>${document.getElementById('versionControlGradeDisplay').textContent}</td>
+                    <td>${document.getElementById('versionControlWeightedScoreDisplay').textContent}</td>
+                </tr>
+                <tr>
+                    <td>Deployment</td>
+                    <td>${document.getElementById('deploymentWeightDisplay').textContent}</td>
+                    <td>${document.getElementById('deploymentGradeDisplay').textContent}</td>
+                    <td>${document.getElementById('deploymentWeightedScoreDisplay').textContent}</td>
+                </tr>
+                <tr>
+                    <td>Programming Language and Frameworks</td>
+                    <td>${document.getElementById('languageFrameworkWeightDisplay').textContent}</td>
+                    <td>${document.getElementById('languageFrameworkGradeDisplay').textContent}</td>
+                    <td>${document.getElementById('languageFrameworkWeightedScoreDisplay').textContent}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>${document.getElementById('totalWeight').textContent}</td>
+                    <td>${document.getElementById('totalGrade').textContent}</td>
+                    <td>${document.getElementById('totalWeightedScore').textContent}</td>
+                </tr>
+            </tbody>
+        </table>
+    `;
+
     reportContent += `</body></html>`;
+
 
     const newTab = window.open();
     newTab.document.write(reportContent);
@@ -140,7 +202,9 @@ function generateReport() {
 // Function to clear form data
 function clearForm() {
     document.querySelectorAll('#scoringForm input, #scoringForm select').forEach(input => {
-        input.value = '';
+        if (!input.name.includes('weight') && !input.id.includes('weight')) {
+            input.value = '';
+        }
     });
     localStorage.removeItem('scoringFormData');
     calculateTotalScore();
